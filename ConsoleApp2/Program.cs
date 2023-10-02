@@ -39,11 +39,25 @@ namespace ConsoleApp2
                 case 1:
                     CadastrarAutomovel();
                     break;
+                case 2:
+                    MostrarEstoque();
+                    break;
+                case 3:
+
+                    break;
             }
         }
 
         static void CadastrarAutomovel()
         {
+            String caminho = "C:\\Users\\Public\\CadastroAutomovel";
+            List<Automovel> Lista_Automovel = new List<Automovel>();
+            StreamReader y;
+            y = File.OpenText(caminho);
+            string json = y.ReadLine();
+            Lista_Automovel = JsonSerializer.Deserialize<List<Automovel>>(json);
+            y.Close();
+
             Automovel automovel1 = new Automovel();
             Console.Write("Digite a Marca = ");
             automovel1.Marca = Console.ReadLine();
@@ -60,8 +74,6 @@ namespace ConsoleApp2
             Console.Write("Digite o Ano Modelo = ");
             automovel1.AnoModelo = Convert.ToInt32(Console.ReadLine());
 
-
-            List<Automovel> Lista_Automovel = new List<Automovel>();
             Lista_Automovel.Add(automovel1);
 
             foreach (Automovel automovel in Lista_Automovel)
@@ -75,12 +87,36 @@ namespace ConsoleApp2
                 Console.WriteLine(automovel.AnoModelo);
             }
 
-            string json = JsonSerializer.Serialize(Lista_Automovel);
             StreamWriter x;
-            StreamReader y;
+            x = File.CreateText(caminho);
+            json = JsonSerializer.Serialize(Lista_Automovel);
+            x.Write(json);
+            x.Close();
+        }
+
+        static void MostrarEstoque()
+        {
             String caminho = "C:\\Users\\Public\\CadastroAutomovel";
+            List<Automovel> Lista_Automovel = new List<Automovel>();
+            StreamReader y;
+            y = File.OpenText(caminho);
+            string json = y.ReadLine();
+            Lista_Automovel = JsonSerializer.Deserialize<List<Automovel>>(json);
+            y.Close();
+            Console.WriteLine("Aqui está o estoque de Automoveis disponiveis!");
+            Console.WriteLine();
 
-
+            foreach (Automovel automovel in Lista_Automovel)
+            {
+                Console.Write($"{automovel.Marca} ");
+                Console.WriteLine(automovel.Modelo);
+                Console.WriteLine($"{automovel.Powertrain}");
+                Console.Write($"{automovel.Versao}    Cor = ");
+                Console.WriteLine(automovel.Cor);
+                Console.Write($"{automovel.Ano}/");
+                Console.WriteLine(automovel.AnoModelo);
+                Console.WriteLine();
+            }
         }
     }
 }
