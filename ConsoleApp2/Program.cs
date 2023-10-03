@@ -8,7 +8,8 @@ namespace ConsoleApp2
 {
     internal class Program
     {
-        int id = 1;
+        int AUTid = 1;
+        List<Automovel> Lista_Automovel = new List<Automovel>();
 
         static void Main(string[] args)
         {
@@ -50,29 +51,10 @@ namespace ConsoleApp2
 
         static void CadastrarAutomovel()
         {
-            String caminho = "C:\\Users\\Public\\CadastroAutomovel";
-            List<Automovel> Lista_Automovel = new List<Automovel>();
-            StreamReader y;
-            y = File.OpenText(caminho);
-            string json = y.ReadLine();
-            Lista_Automovel = JsonSerializer.Deserialize<List<Automovel>>(json);
-            y.Close();
 
-            Automovel automovel1 = new Automovel();
-            Console.Write("Digite a Marca = ");
-            automovel1.Marca = Console.ReadLine();
-            Console.Write("Digite o Modelo = ");
-            automovel1.Modelo = Console.ReadLine();
-            Console.Write("Digite o PowerTrain = ");
-            automovel1.Powertrain = Console.ReadLine();
-            Console.Write("Digite a Versão = ");
-            automovel1.Versao = Console.ReadLine();
-            Console.Write("Digite a Cor = ");
-            automovel1.Cor = Console.ReadLine();
-            Console.Write("Digite o Ano = ");
-            automovel1.Ano = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Digite o Ano Modelo = ");
-            automovel1.AnoModelo = Convert.ToInt32(Console.ReadLine());
+            Automovel.LerArquivo();
+
+            Automovel.CadastrarCarro();
 
             Lista_Automovel.Add(automovel1);
 
@@ -117,6 +99,7 @@ namespace ConsoleApp2
                 Console.WriteLine(automovel.AnoModelo);
                 Console.WriteLine();
             }
+            Console.ReadLine();
         }
     }
 }
