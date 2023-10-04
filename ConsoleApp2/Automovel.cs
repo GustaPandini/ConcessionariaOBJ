@@ -17,7 +17,9 @@ namespace ConsoleApp2
         public int Ano { get; set; }
         public int AnoModelo { get; set; }
 
-        private List<Automovel> Lista_Automovel;
+
+
+        private static List<Automovel> Lista_Automovel;
             
 
         public static void LerArquivo()
@@ -28,6 +30,16 @@ namespace ConsoleApp2
             string json = y.ReadLine();
             Lista_Automovel = JsonSerializer.Deserialize<List<Automovel>>(json);
             y.Close();
+        }
+
+        public static void EscreverArquivo()
+        {
+            String caminho = "C:\\Users\\Public\\CadastroAutomovel";
+            StreamWriter x;
+            x = File.CreateText(caminho);
+            string json = JsonSerializer.Serialize(Lista_Automovel);
+            x.Write(json);
+            x.Close();
         }
         
         public static void CadastrarCarro()
@@ -49,6 +61,20 @@ namespace ConsoleApp2
             automovel1.AnoModelo = Convert.ToInt32(Console.ReadLine());
 
             Lista_Automovel.Add(automovel1);
+        }
+
+        public static void MostrarAutomovel()
+        {
+            foreach (Automovel automovel in Lista_Automovel)
+            {
+                Console.WriteLine(automovel.Marca);
+                Console.WriteLine(automovel.Modelo);
+                Console.WriteLine(automovel.Powertrain);
+                Console.WriteLine(automovel.Versao);
+                Console.WriteLine(automovel.Cor);
+                Console.WriteLine(automovel.Ano);
+                Console.WriteLine(automovel.AnoModelo);
+            }
         }
     }
 }
