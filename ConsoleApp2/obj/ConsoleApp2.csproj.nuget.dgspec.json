@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gustavo.pereira13\\OneDrive - SENAC-SC\\Anexos\\Terceiro Modulo Orientção por Objeto\\ConsoleApp2\\ConsoleApp2\\ConsoleApp2.csproj": {}
+    "C:\\Users\\gugui\\Desktop\\Portifólio\\ConcessionariaOBJ\\ConsoleApp2\\ConsoleApp2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gustavo.pereira13\\OneDrive - SENAC-SC\\Anexos\\Terceiro Modulo Orientção por Objeto\\ConsoleApp2\\ConsoleApp2\\ConsoleApp2.csproj": {
+    "C:\\Users\\gugui\\Desktop\\Portifólio\\ConcessionariaOBJ\\ConsoleApp2\\ConsoleApp2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gustavo.pereira13\\OneDrive - SENAC-SC\\Anexos\\Terceiro Modulo Orientção por Objeto\\ConsoleApp2\\ConsoleApp2\\ConsoleApp2.csproj",
+        "projectUniqueName": "C:\\Users\\gugui\\Desktop\\Portifólio\\ConcessionariaOBJ\\ConsoleApp2\\ConsoleApp2.csproj",
         "projectName": "ConsoleApp2",
-        "projectPath": "C:\\Users\\gustavo.pereira13\\OneDrive - SENAC-SC\\Anexos\\Terceiro Modulo Orientção por Objeto\\ConsoleApp2\\ConsoleApp2\\ConsoleApp2.csproj",
-        "packagesPath": "C:\\Users\\gustavo.pereira13\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gustavo.pereira13\\OneDrive - SENAC-SC\\Anexos\\Terceiro Modulo Orientção por Objeto\\ConsoleApp2\\ConsoleApp2\\obj\\",
+        "projectPath": "C:\\Users\\gugui\\Desktop\\Portifólio\\ConcessionariaOBJ\\ConsoleApp2\\ConsoleApp2.csproj",
+        "packagesPath": "C:\\Users\\gugui\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gugui\\Desktop\\Portifólio\\ConcessionariaOBJ\\ConsoleApp2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\gustavo.pereira13\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gugui\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -43,6 +43,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[9.5.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -59,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
