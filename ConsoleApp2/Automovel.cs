@@ -1,13 +1,17 @@
-﻿using System;
+﻿using ConsoleApp2.ConsoleHelper;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Dapper;
 
 namespace ConsoleApp2
 {
-    internal class Automovel
+    internal class Automovel : Database
     {
         public string Marca { get; set; }
         public string Modelo { get; set; }
@@ -16,64 +20,62 @@ namespace ConsoleApp2
         public string Cor { get; set; }
         public int Ano { get; set; }
         public int AnoModelo { get; set; }
+        public int EstadoAutomovelId { get; set; }
 
 
-
-        private static List<Automovel> Lista_Automovel;
-            
-
-        public static void LerArquivo()
+        public void CadastrarCarro()
         {
-            String caminho = "C:\\Users\\Public\\CadastroAutomovel";
-            StreamReader y;
-            y = File.OpenText(caminho);
-            string json = y.ReadLine();
-            Lista_Automovel = JsonSerializer.Deserialize<List<Automovel>>(json);
-            y.Close();
-        }
-
-        public static void EscreverArquivo()
-        {
-            String caminho = "C:\\Users\\Public\\CadastroAutomovel";
-            StreamWriter x;
-            x = File.CreateText(caminho);
-            string json = JsonSerializer.Serialize(Lista_Automovel);
-            x.Write(json);
-            x.Close();
-        }
-        
-        public static void CadastrarCarro()
-        {
-            Automovel automovel1 = new Automovel();
             Console.Write("Digite a Marca = ");
-            automovel1.Marca = Console.ReadLine();
+            this.Marca = Console.ReadLine();
             Console.Write("Digite o Modelo = ");
-            automovel1.Modelo = Console.ReadLine();
+            this.Modelo = Console.ReadLine();
             Console.Write("Digite o PowerTrain = ");
-            automovel1.Powertrain = Console.ReadLine();
+            this.Powertrain = Console.ReadLine();
             Console.Write("Digite a Versão = ");
-            automovel1.Versao = Console.ReadLine();
+            this.Versao = Console.ReadLine();
             Console.Write("Digite a Cor = ");
-            automovel1.Cor = Console.ReadLine();
+            this.Cor = Console.ReadLine();
             Console.Write("Digite o Ano = ");
-            automovel1.Ano = Convert.ToInt32(Console.ReadLine());
+            this.Ano = Convert.ToInt32(Console.ReadLine());
             Console.Write("Digite o Ano Modelo = ");
-            automovel1.AnoModelo = Convert.ToInt32(Console.ReadLine());
+            this.AnoModelo = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Digite ID do Estado do Automovel = ");
+            this.EstadoAutomovelId = Convert.ToInt32(Console.ReadLine());
 
-            Lista_Automovel.Add(automovel1);
+            string sql = "INSERT INTO automovel VALUEs (NULL, @Marca, @Modelo, @Powertrain, @Versao, @Cor, @Ano, @AnoModelo, @EstadoAutomovelId)";
+            int linhas = Execute(sql, this);
         }
 
-        public static void MostrarAutomovel()
+        public void MostrarAutomovel()
         {
-            foreach (Automovel automovel in Lista_Automovel)
+            string sql = @"SELECT 
+                            MARCA,
+                            MODELO,
+                            POWERTRAIN,
+                            VERSAO,
+                            COR,
+                            ANO,
+                            ANOMODELO AS AnoModelo
+                            FROM automovel";
+
+            using (MySqlConnection conexao = GetConnection())
             {
-                Console.WriteLine(automovel.Marca);
-                Console.WriteLine(automovel.Modelo);
-                Console.WriteLine(automovel.Powertrain);
-                Console.WriteLine(automovel.Versao);
-                Console.WriteLine(automovel.Cor);
-                Console.WriteLine(automovel.Ano);
-                Console.WriteLine(automovel.AnoModelo);
+                List<Automovel> automoveis =
+                    conexao.Query<Automovel>(sql).ToList();
+
+                Console.WriteLine("=== LISTA DE AUTOMÓVEIS ===");
+
+                foreach (var automovel in automoveis)
+                {
+                    Console.WriteLine($"Marca: {automovel.Marca}");
+                    Console.WriteLine($"Modelo: {automovel.Modelo}");
+                    Console.WriteLine($"Powertrain: {automovel.Powertrain}");
+                    Console.WriteLine($"Versão: {automovel.Versao}");
+                    Console.WriteLine($"Cor: {automovel.Cor}");
+                    Console.WriteLine($"Ano: {automovel.Ano}");
+                    Console.WriteLine($"Ano Modelo: {automovel.AnoModelo}");
+                    Console.WriteLine("---------------------------");
+                }
             }
         }
     }

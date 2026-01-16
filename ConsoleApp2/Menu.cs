@@ -25,17 +25,18 @@ namespace ConsoleApp2
 
         public static void AcesosMenuPrincipal()
         {
+            Automovel automovel = new Automovel();
             Console.Write("Digite o numero da ação que deseja realizar = ");
             int respostaMenu = Convert.ToInt32(Console.ReadLine());
 
             switch (respostaMenu)
             {
                 case 1:
-                    CadastrarAutomovel();
+                    automovel.CadastrarCarro();
                     MenuPrincipal();
                     break;
                 case 2:
-                    MostrarEstoque();
+                    automovel.MostrarAutomovel();
                     MenuPrincipal();
                     break;
                 case 3:
@@ -47,43 +48,17 @@ namespace ConsoleApp2
         public static void CadastrarAutomovel()
         {
 
-            Automovel.LerArquivo();
 
-            Automovel.CadastrarCarro();
+            Automovel automovel = new Automovel();
+            automovel.CadastrarCarro();
 
-            Automovel.EscreverArquivo();
 
             Console.WriteLine("Ok seu Automovel foi cadastrado, Pressione ENTER para retornar ao Menu!");
             Console.ReadLine();
             Console.Clear();
         }
 
-        public static void MostrarEstoque()
-        {
-            String caminho = "C:\\Users\\Public\\CadastroAutomovel";
-            List<Automovel> Lista_Automovel = new List<Automovel>();
-            StreamReader y;
-            y = File.OpenText(caminho);
-            string json = y.ReadLine();
-            Lista_Automovel = JsonSerializer.Deserialize<List<Automovel>>(json);
-            y.Close();
-            Console.WriteLine("Aqui está o estoque de Automoveis disponiveis!");
-            Console.WriteLine();
-
-            foreach (Automovel automovel in Lista_Automovel)
-            {
-                Console.Write($"{automovel.Marca} ");
-                Console.WriteLine(automovel.Modelo);
-                Console.WriteLine($"{automovel.Powertrain}");
-                Console.Write($"{automovel.Versao}    Cor = ");
-                Console.WriteLine(automovel.Cor);
-                Console.Write($"{automovel.Ano}/");
-                Console.WriteLine(automovel.AnoModelo);
-                Console.WriteLine();
-            }
-            Console.ReadLine();
-
-        }
+        
 
     }
 }
