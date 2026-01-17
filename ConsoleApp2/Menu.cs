@@ -44,23 +44,11 @@ namespace ConsoleApp2
                     automovel.AlterarAutomovel();
                     MenuPrincipal();
                     break;
+                case 4:
+                    automovel.DeletarAutomovel();
+                    MenuPrincipal();
+                    break;
             }
         }
-
-        public static void CadastrarAutomovel()
-        {
-
-
-            Automovel automovel = new Automovel();
-            automovel.CadastrarCarro();
-
-
-            Console.WriteLine("Ok seu Automovel foi cadastrado, Pressione ENTER para retornar ao Menu!");
-            Console.ReadLine();
-            Console.Clear();
-        }
-
-        
-
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Dapper;
+using Mysqlx.Prepare;
 
 namespace ConsoleApp2
 {
@@ -108,6 +109,16 @@ namespace ConsoleApp2
             string sql = "UPDATE automovel " +
                          "SET MARCA = @marca, MODELO = @modelo, POWERTRAIN = @powertrain, VERSAO = @versao, COR = @cor, " +
                          "ANO = @ano, ANOMODELO = @anoModelo WHERE Id = @id";
+
+            Execute(sql, this);
+        }
+
+        public void DeletarAutomovel()
+        {
+            Console.WriteLine("Digite o Id do automóvel que você deseja deletar no banco");
+            this.Id = Convert.ToInt32(Console.ReadLine());
+
+            string sql = "DELETE FROM automovel WHERE ID = @Id";
 
             Execute(sql, this);
         }

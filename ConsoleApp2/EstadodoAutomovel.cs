@@ -8,7 +8,6 @@ namespace ConsoleApp2
 {
     internal class EstadodoAutomovel
     {
-        
         public double kilometragem { get; set; }
         public double tabelaFipe { get; set; }
         public double preco { get; set; }
