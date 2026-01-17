@@ -16,7 +16,8 @@ namespace ConsoleApp2
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("1 = Adicionar Automóvel");
             Console.WriteLine("2 = Ver lista de Automóveis");
-            Console.WriteLine("3 = Realizar uma venda");
+            Console.WriteLine("3 = Alterar Automóvel");
+            Console.WriteLine("4 = Excluir Automóvel");
             Console.WriteLine("-----------------------------------");
             Console.WriteLine();
 
@@ -40,7 +41,8 @@ namespace ConsoleApp2
                     MenuPrincipal();
                     break;
                 case 3:
-
+                    automovel.AlterarAutomovel();
+                    MenuPrincipal();
                     break;
             }
         }

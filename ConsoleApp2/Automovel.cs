@@ -13,6 +13,7 @@ namespace ConsoleApp2
 {
     internal class Automovel : Database
     {
+        public int Id { get; set; }
         public string Marca { get; set; }
         public string Modelo { get; set; }
         public string Powertrain { get; set; }
@@ -60,8 +61,7 @@ namespace ConsoleApp2
 
             using (MySqlConnection conexao = GetConnection())
             {
-                List<Automovel> automoveis =
-                    conexao.Query<Automovel>(sql).ToList();
+                List<Automovel> automoveis = conexao.Query<Automovel>(sql).ToList();
 
                 Console.WriteLine("=== LISTA DE AUTOMÓVEIS ===");
 
@@ -77,6 +77,39 @@ namespace ConsoleApp2
                     Console.WriteLine("---------------------------");
                 }
             }
+        }
+
+        public void AlterarAutomovel()
+        {
+            Console.WriteLine("Digite o Id do automóvel que você deseja alterar no banco");
+            this.Id = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Digite a Marca do automóvel");
+            this.Marca = Console.ReadLine();
+
+            Console.WriteLine("Digite o Modelo do automóvel");
+            this.Modelo = Console.ReadLine();
+
+            Console.WriteLine("Digite o Powertrain do automóvel");
+            this.Powertrain = Console.ReadLine();
+
+            Console.WriteLine("Digite a Versão do automóvel");
+            this.Versao = Console.ReadLine();
+
+            Console.WriteLine("Digite a Cor do automóvel");
+            this.Cor = Console.ReadLine();
+
+            Console.WriteLine("Digite o Ano do automóvel");
+            this.Ano = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Digite o Ano/Modelo do automóvel");
+            this.AnoModelo = Convert.ToInt32(Console.ReadLine());
+
+            string sql = "UPDATE automovel " +
+                         "SET MARCA = @marca, MODELO = @modelo, POWERTRAIN = @powertrain, VERSAO = @versao, COR = @cor, " +
+                         "ANO = @ano, ANOMODELO = @anoModelo WHERE Id = @id";
+
+            Execute(sql, this);
         }
     }
 }
