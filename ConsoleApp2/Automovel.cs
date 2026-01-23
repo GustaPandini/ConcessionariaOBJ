@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Dapper;
 using Mysqlx.Prepare;
+using System.Runtime.CompilerServices;
 
 namespace ConsoleApp2
 {
@@ -128,38 +129,117 @@ namespace ConsoleApp2
         public void AlterarAutomovel()
         {
             Console.Write("Digite o Id do automóvel que você deseja alterar no banco = ");
-            this.Id = Convert.ToInt32(Console.ReadLine());
+            int Id = Convert.ToInt32(Console.ReadLine());
+            this.Id = Id;
 
-            Console.Write("Digite a Marca do automóvel = ");
-            this.Marca = Console.ReadLine();
+            Automovel automovelId = MostarAutomovelPorId(Id);
 
-            Console.Write("Digite o Modelo do automóvel = ");
-            this.Modelo = Console.ReadLine();
+            Console.Write("Digite o novo valor para a Marca do automovel (se não quiser alterar pressione Enter) = ");
+            string uptadeMarca = Console.ReadLine();
+            if(uptadeMarca == "")
+            {
+                this.Marca = automovelId.Marca;
+            }
+            else
+            {
+                this.Marca = uptadeMarca;
+            }
 
-            Console.Write("Digite o Powertrain do automóvel = ");
-            this.Powertrain = Console.ReadLine();
+            Console.Write("Digite o novo valor para o Modelo do automovel (se não quiser alterar pressione Enter) = ");
+            string uptadeModelo = Console.ReadLine();
+            if (uptadeModelo == "")
+            {
+                this.Modelo = automovelId.Modelo;
+            }
+            else
+            {
+                this.Modelo = uptadeModelo;
+            }
 
-            Console.Write("Digite a Versão do automóvel = ");
-            this.Versao = Console.ReadLine();
+            Console.Write("Digite o novo valor para o Powertrain do automovel (se não quiser alterar pressione Enter) = ");
+            string uptadePowertrain = Console.ReadLine();
+            if (uptadePowertrain == "")
+            {
+                this.Powertrain = automovelId.Powertrain;
+            }
+            else
+            {
+                this.Powertrain = uptadePowertrain;
+            }
 
-            Console.Write("Digite a Cor do automóvel = ");
-            this.Cor = Console.ReadLine();
+            Console.Write("Digite o novo valor para a Versão do automovel (se não quiser alterar pressione Enter) = ");
+            string uptadeVersao = Console.ReadLine();
+            if (uptadeVersao == "")
+            {
+                this.Versao = automovelId.Versao;
+            }
+            else
+            {
+                this.Versao = uptadeVersao;
+            }
 
-            Console.Write("Digite o Ano do automóvel = ");
-            this.Ano = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Digite o novo valor para a Cor do automovel (se não quiser alterar pressione Enter) = ");
+            string uptadeCor = Console.ReadLine();
+            if (uptadeCor == "")
+            {
+                this.Cor = automovelId.Cor;
+            }
+            else
+            {
+                this.Cor = uptadeCor;
+            }
 
-            Console.Write("Digite o Ano/Modelo do automóvel = ");
-            this.AnoModelo = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Digite o novo valor para o Ano do automovel (se não quiser alterar pressione Enter) = ");
+            string uptadeAnoString = Console.ReadLine();
+            if (uptadeAnoString == "")
+            {
+                this.Ano = automovelId.Ano;
+            }
+            else
+            {
+                int uptadeAno = Convert.ToInt32(uptadeAnoString);
+                this.Ano = uptadeAno;
+            }
 
-            Console.Write("Digite a quilometragem desse automóvel = ");
-            this.quilometragem = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Digite o novo valor para o Ano/Modelo do automovel (se não quiser alterar pressione Enter) = ");
+            string uptadeAnoModeloString = Console.ReadLine();
+            if (uptadeAnoModeloString == "")
+            {
+                this.AnoModelo = automovelId.AnoModelo;
+            }
+            else
+            {
+                int uptadeAnoModelo = Convert.ToInt32(uptadeAnoModeloString);
+                this.AnoModelo = uptadeAnoModelo;
+            }
 
-            Console.Write("Digite o preço desse automóvel = ");
-            this.preco = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Digite o novo valor para a Quilometragem do automovel (se não quiser alterar pressione Enter) = ");
+            string uptadeQuilometragemString = Console.ReadLine();
+            if (uptadeQuilometragemString == "")
+            {
+                this.quilometragem = automovelId.quilometragem;
+            }
+            else
+            {
+                int uptadeQuilometragem = Convert.ToInt32(uptadeQuilometragemString);
+                this.quilometragem = uptadeQuilometragem;
+            }
+
+            Console.Write("Digite o novo valor para o Preço do automovel (se não quiser alterar pressione Enter) = ");
+            string uptadePrecoString = Console.ReadLine();
+            if (uptadePrecoString == "")
+            {
+                this.preco = automovelId.preco;
+            }
+            else
+            {
+                int uptadePreco = Convert.ToInt32(uptadePrecoString);
+                this.preco = uptadePreco;
+            }
 
             while (true)
             {
-                Console.Write("Digite se esse automóvel é blindado (Sim ou Não) = ");
+                Console.Write("Digite se esse automóvel é blindado (Sim ou Não), se não quiser alterar pressione Enter = ");
                 string respBlindado = Console.ReadLine().ToLower();
                 if (respBlindado == "sim")
                 {
@@ -171,14 +251,28 @@ namespace ConsoleApp2
                     this.blindado = false;
                     break;
                 }
+                else if (respBlindado == "")
+                {
+                    this.blindado = automovelId.blindado;
+                    break;
+                }
                 else
                 {
                     Console.WriteLine("Resposta inválida, digite sim ou não, tente novamente!");
                 }
             }
 
-            Console.Write("Digite quantos donos esse automóvel já teve = ");
-            this.quantidadeDonos = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Digite o novo valor para a quantidade de donos do automovel (se não quiser alterar pressione Enter) = ");
+            string uptadeQuantidadeDonosString = Console.ReadLine();
+            if (uptadeQuantidadeDonosString == "")
+            {
+                this.quantidadeDonos = automovelId.quantidadeDonos;
+            }
+            else
+            {
+                int uptadeQuantidadeDonos = Convert.ToInt32(uptadeQuantidadeDonosString);
+                this.quantidadeDonos = uptadeQuantidadeDonos;
+            }
 
             string sql = "UPDATE automovel " +
                          "SET MARCA = @marca, MODELO = @modelo, POWERTRAIN = @powertrain, VERSAO = @versao, COR = @cor, " +
@@ -204,6 +298,28 @@ namespace ConsoleApp2
             Console.WriteLine("Veículo excluido com sucesso, pressione Enter para voltar ao menu.");
             Console.ReadLine();
             Console.Clear();
+        }
+
+        public Automovel MostarAutomovelPorId(int Id)
+        {
+            string sql = @"SELECT 
+                            ID,
+                            MARCA,
+                            MODELO,
+                            POWERTRAIN,
+                            VERSAO,
+                            COR,
+                            ANO,
+                            ANOMODELO AS AnoModelo,
+                            QUILOMETRAGEM,
+                            PRECO,
+                            BLINDADO,
+                            QUANTIDADEDONOS AS quantidadeDonos
+                            FROM automovel WHERE Id = @id";
+            using (MySqlConnection conexao = GetConnection())
+            {
+                return conexao.QuerySingleOrDefault<Automovel>(sql, new { Id });
+            }
         }
     }
 }
