@@ -23,10 +23,10 @@ namespace ConsoleApp2
         public string Cor { get; set; }
         public int Ano { get; set; }
         public int AnoModelo { get; set; }
-        public int quilometragem { get; set; }
-        public double preco { get; set; }
-        public bool blindado { get; set; }
-        public int quantidadeDonos { get; set; }
+        public int Quilometragem { get; set; }
+        public decimal Preco { get; set; }
+        public bool Blindado { get; set; }
+        public int QuantidadeDonos { get; set; }
 
 
         public void CadastrarCarro()
@@ -46,9 +46,9 @@ namespace ConsoleApp2
             Console.Write("Digite o Ano Modelo = ");
             this.AnoModelo = Convert.ToInt32(Console.ReadLine());
             Console.Write("Digite a quilometragem desse automóvel = ");
-            this.quilometragem = Convert.ToInt32(Console.ReadLine());
+            this.Quilometragem = Convert.ToInt32(Console.ReadLine());
             Console.Write("Digite o preço desse automóvel = ");
-            this.preco = Convert.ToDouble(Console.ReadLine());
+            this.Preco = Convert.ToDecimal(Console.ReadLine());
 
             while (true)
             {
@@ -56,12 +56,12 @@ namespace ConsoleApp2
                 string respBlindado = Console.ReadLine().ToLower();
                 if (respBlindado == "sim")
                 {
-                    this.blindado = true;
+                    this.Blindado = true;
                     break;
                 }
                 else if (respBlindado == "não")
                 {
-                    this.blindado = false;
+                    this.Blindado = false;
                     break;
                 }
                 else
@@ -71,10 +71,10 @@ namespace ConsoleApp2
             }
 
             Console.Write("Digite quantos donos esse automóvel já teve = ");
-            this.quantidadeDonos = Convert.ToInt32(Console.ReadLine());
+            this.QuantidadeDonos = Convert.ToInt32(Console.ReadLine());
 
             string sql = "INSERT INTO automovel VALUEs (NULL, @Marca, @Modelo, @Powertrain, @Versao, @Cor, @Ano, " +
-                         "@AnoModelo, @quilometragem, @preco, @blindado, @quantidadeDonos)";
+                         "@AnoModelo, @Quilometragem, @Preco, @Blindado, @QuantidadeDonos)";
             Execute(sql, this);
 
             Console.WriteLine("Veículo cadastrado com sucesso!, pressione Enter para voltar ao menu.");
@@ -84,20 +84,7 @@ namespace ConsoleApp2
 
         public void MostrarAutomovel()
         {
-            string sql = @"SELECT 
-                            ID,
-                            MARCA,
-                            MODELO,
-                            POWERTRAIN,
-                            VERSAO,
-                            COR,
-                            ANO,
-                            ANOMODELO AS AnoModelo,
-                            QUILOMETRAGEM,
-                            PRECO,
-                            BLINDADO,
-                            QUANTIDADEDONOS AS quantidadeDonos
-                            FROM automovel";
+            string sql = @"SELECT * FROM automovel";
 
             using (MySqlConnection conexao = GetConnection())
             {
@@ -115,10 +102,11 @@ namespace ConsoleApp2
                     Console.WriteLine($"Cor: {automovel.Cor}");
                     Console.WriteLine($"Ano: {automovel.Ano}");
                     Console.WriteLine($"Ano Modelo: {automovel.AnoModelo}");
-                    Console.WriteLine($"Quilometragem: {automovel.quilometragem}");
-                    Console.WriteLine($"Preço: {automovel.preco}");
-                    Console.WriteLine($"Blindado: {automovel.blindado}");
-                    Console.WriteLine($"Quantidade de donos: {automovel.quantidadeDonos}");
+                    Console.WriteLine($"Quilometragem: {automovel.Quilometragem}");
+                    Console.WriteLine($"Preço: {automovel.Preco}");
+                    if(automovel.Blindado == true) { Console.WriteLine("Blindado: Sim");}
+                    else { Console.WriteLine("Blindado: Não");}
+                    Console.WriteLine($"Quantidade de donos: {automovel.QuantidadeDonos}");
                     Console.WriteLine("---------------------------");
                 }
             }
@@ -217,24 +205,24 @@ namespace ConsoleApp2
             string uptadeQuilometragemString = Console.ReadLine();
             if (uptadeQuilometragemString == "")
             {
-                this.quilometragem = automovelId.quilometragem;
+                this.Quilometragem = automovelId.Quilometragem;
             }
             else
             {
                 int uptadeQuilometragem = Convert.ToInt32(uptadeQuilometragemString);
-                this.quilometragem = uptadeQuilometragem;
+                this.Quilometragem = uptadeQuilometragem;
             }
 
             Console.Write("Digite o novo valor para o Preço do automovel (se não quiser alterar pressione Enter) = ");
             string uptadePrecoString = Console.ReadLine();
             if (uptadePrecoString == "")
             {
-                this.preco = automovelId.preco;
+                this.Preco = automovelId.Preco;
             }
             else
             {
-                int uptadePreco = Convert.ToInt32(uptadePrecoString);
-                this.preco = uptadePreco;
+                decimal uptadePreco = Convert.ToDecimal(uptadePrecoString);
+                this.Preco = uptadePreco;
             }
 
             while (true)
@@ -243,17 +231,17 @@ namespace ConsoleApp2
                 string respBlindado = Console.ReadLine().ToLower();
                 if (respBlindado == "sim")
                 {
-                    this.blindado = true;
+                    this.Blindado = true;
                     break;
                 }
                 else if (respBlindado == "não")
                 {
-                    this.blindado = false;
+                    this.Blindado = false;
                     break;
                 }
                 else if (respBlindado == "")
                 {
-                    this.blindado = automovelId.blindado;
+                    this.Blindado = automovelId.Blindado;
                     break;
                 }
                 else
@@ -266,12 +254,12 @@ namespace ConsoleApp2
             string uptadeQuantidadeDonosString = Console.ReadLine();
             if (uptadeQuantidadeDonosString == "")
             {
-                this.quantidadeDonos = automovelId.quantidadeDonos;
+                this.QuantidadeDonos = automovelId.QuantidadeDonos;
             }
             else
             {
                 int uptadeQuantidadeDonos = Convert.ToInt32(uptadeQuantidadeDonosString);
-                this.quantidadeDonos = uptadeQuantidadeDonos;
+                this.QuantidadeDonos = uptadeQuantidadeDonos;
             }
 
             string sql = "UPDATE automovel " +
@@ -302,20 +290,7 @@ namespace ConsoleApp2
 
         public Automovel MostarAutomovelPorId(int Id)
         {
-            string sql = @"SELECT 
-                            ID,
-                            MARCA,
-                            MODELO,
-                            POWERTRAIN,
-                            VERSAO,
-                            COR,
-                            ANO,
-                            ANOMODELO AS AnoModelo,
-                            QUILOMETRAGEM,
-                            PRECO,
-                            BLINDADO,
-                            QUANTIDADEDONOS AS quantidadeDonos
-                            FROM automovel WHERE Id = @id";
+            string sql = @"SELECT * FROM automovel WHERE Id = @id";
             using (MySqlConnection conexao = GetConnection())
             {
                 return conexao.QuerySingleOrDefault<Automovel>(sql, new { Id });
