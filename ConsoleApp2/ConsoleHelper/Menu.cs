@@ -35,19 +35,19 @@ namespace ConsoleApp2.ConsoleHelper
             switch (respostaMenu)
             {
                 case 1:
-                    automovelModel.CadastrarCarro();
+                    automovelModel.Cadastrar();
                     MenuPrincipal();
                     break;
                 case 2:
-                    automovelModel.MostrarAutomovel();
+                    automovelModel.Listar();
                     MenuPrincipal();
                     break;
                 case 3:
-                    automovelModel.AlterarAutomovel();
+                    automovelModel.Alterar();
                     MenuPrincipal();
                     break;
                 case 4:
-                    automovelModel.DeletarAutomovel();
+                    automovelModel.Deletar();
                     MenuPrincipal();
                     break;
             }

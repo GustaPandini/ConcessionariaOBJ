@@ -10,13 +10,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Dapper;
+using ConsoleApp2.Interfaces;
 
 namespace ConsoleApp2.Model
 {
-    internal class AutomovelModel : Database    
+    internal class AutomovelModel : Database, Icrud<Automovel> 
     {   
         Automovel automovel = new Automovel();
-        public void CadastrarCarro()
+        public void Cadastrar()
         {
             Console.Write("Digite a Marca = ");
             automovel.Marca = Console.ReadLine();
@@ -46,7 +47,7 @@ namespace ConsoleApp2.Model
                     automovel.Blindado = true;
                     break;
                 }
-                else if (respBlindado == "não")
+                else if (respBlindado == "não" || respBlindado == "nao")
                 {
                     automovel.Blindado = false;
                     break;
@@ -69,7 +70,7 @@ namespace ConsoleApp2.Model
             Console.Clear();
         }
 
-        public void MostrarAutomovel()
+        public void Listar()
         {
             string sql = @"SELECT * FROM automovel";
 
@@ -101,7 +102,7 @@ namespace ConsoleApp2.Model
             Console.ReadLine();
         }
 
-        public void AlterarAutomovel()
+        public void Alterar()
         {
             Console.Write("Digite o Id do automóvel que você deseja alterar no banco = ");
             int Id = Convert.ToInt32(Console.ReadLine());
@@ -221,7 +222,7 @@ namespace ConsoleApp2.Model
                     automovel.Blindado = true;
                     break;
                 }
-                else if (respBlindado == "não")
+                else if (respBlindado == "não" || respBlindado == "nao")
                 {
                     automovel.Blindado = false;
                     break;
@@ -261,7 +262,7 @@ namespace ConsoleApp2.Model
             Console.Clear();
         }
 
-        public void DeletarAutomovel()
+        public void Deletar()
         {
             Console.Write("Digite o Id do automóvel que você deseja deletar no banco = ");
             automovel.Id = Convert.ToInt32(Console.ReadLine());
