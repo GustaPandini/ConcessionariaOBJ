@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ConsoleApp2.Entity;
+using ConsoleApp2.Model;
 
 namespace ConsoleApp2.ConsoleHelper
 {
@@ -27,26 +28,26 @@ namespace ConsoleApp2.ConsoleHelper
 
         public static void AcesosMenuPrincipal()
         {
-            Automovel automovel = new Automovel();
+            AutomovelModel automovelModel = new AutomovelModel();
             Console.Write("Digite o numero da ação que deseja realizar = ");
             int respostaMenu = Convert.ToInt32(Console.ReadLine());
 
             switch (respostaMenu)
             {
                 case 1:
-                    automovel.CadastrarCarro();
+                    automovelModel.CadastrarCarro();
                     MenuPrincipal();
                     break;
                 case 2:
-                    automovel.MostrarAutomovel();
+                    automovelModel.MostrarAutomovel();
                     MenuPrincipal();
                     break;
                 case 3:
-                    automovel.AlterarAutomovel();
+                    automovelModel.AlterarAutomovel();
                     MenuPrincipal();
                     break;
                 case 4:
-                    automovel.DeletarAutomovel();
+                    automovelModel.DeletarAutomovel();
                     MenuPrincipal();
                     break;
             }
