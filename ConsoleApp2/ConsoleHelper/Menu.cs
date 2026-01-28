@@ -6,11 +6,15 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using ConsoleApp2.Entity;
 using ConsoleApp2.Model;
+using ConsoleApp2.Entity;
+using ConsoleApp2.Interfaces;
 
 namespace ConsoleApp2.ConsoleHelper
 {
     public class Menu
     {
+        
+        private static Icrud<Automovel> automovel = new AutomovelModel();
         public static void MenuPrincipal()
         {
             Console.WriteLine("Bem vindo ao sistema de controle da concessionária Tainy");
@@ -28,26 +32,25 @@ namespace ConsoleApp2.ConsoleHelper
 
         public static void AcesosMenuPrincipal()
         {
-            AutomovelModel automovelModel = new AutomovelModel();
             Console.Write("Digite o numero da ação que deseja realizar = ");
             int respostaMenu = Convert.ToInt32(Console.ReadLine());
 
             switch (respostaMenu)
             {
                 case 1:
-                    automovelModel.Cadastrar();
+                    automovel.Cadastrar();
                     MenuPrincipal();
                     break;
                 case 2:
-                    automovelModel.Listar();
+                    automovel.Listar();
                     MenuPrincipal();
                     break;
                 case 3:
-                    automovelModel.Alterar();
+                    automovel.Alterar();
                     MenuPrincipal();
                     break;
                 case 4:
-                    automovelModel.Deletar();
+                    automovel.Deletar();
                     MenuPrincipal();
                     break;
             }
