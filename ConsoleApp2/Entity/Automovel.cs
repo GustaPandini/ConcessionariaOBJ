@@ -13,7 +13,7 @@ using System.Runtime.CompilerServices;
 
 namespace ConsoleApp2.Entity
 {
-    internal class Automovel : Database
+    internal class Automovel
     {
         public int Id { get; set; }
         public string Marca { get; set; }
