@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp2.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace ConsoleApp2.Interfaces
 {
     internal interface Icrud<T>
     {
-        void Cadastrar();
+        void Inserir(Automovel automovel);
         void Listar();
-        void Alterar();
-        void Deletar();
+        void Alterar(Automovel automovel);
+        void Deletar(Automovel automovel);
     }
 }

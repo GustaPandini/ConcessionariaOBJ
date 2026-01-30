@@ -5,17 +5,15 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ConsoleApp2.Entity;
-using ConsoleApp2.Model;
-using ConsoleApp2.Entity;
 using ConsoleApp2.Interfaces;
+using ConsoleApp2.Repository;
 
 namespace ConsoleApp2.ConsoleHelper
 {
     public class Menu
     {
         
-        private static Icrud<Automovel> automovel2 = new AutomovelModel();
-        //public static AutomovelConsole automovel = new AutomovelConsole();
+        private static Icrud<Automovel> automovel1 = new AutomovelConsole();
         public static void MenuPrincipal()
         {
             Console.WriteLine("Bem vindo ao sistema de controle da concessionária Tainy");
@@ -33,7 +31,7 @@ namespace ConsoleApp2.ConsoleHelper
 
         public static void AcesosMenuPrincipal()
         {
-            AutomovelConsole automovel1 = new AutomovelConsole();
+            
             Automovel automovel = new Automovel();
             Console.Write("Digite o numero da ação que deseja realizar = ");
             int respostaMenu = Convert.ToInt32(Console.ReadLine());
@@ -41,10 +39,7 @@ namespace ConsoleApp2.ConsoleHelper
             switch (respostaMenu)
             {
                 case 1:
-                    automovel1.Cadastrar(automovel);
-                    Console.WriteLine("Veículo cadastrado com sucesso!, pressione Enter para voltar ao menu.");
-                    Console.ReadLine();
-                    Console.Clear();
+                    automovel1.Inserir(automovel);
                     MenuPrincipal();
                     break;
                 case 2:
@@ -52,11 +47,11 @@ namespace ConsoleApp2.ConsoleHelper
                     MenuPrincipal();
                     break;
                 case 3:
-                    automovel2.Alterar();
+                    automovel1.Alterar(automovel);
                     MenuPrincipal();
                     break;
                 case 4:
-                    automovel2.Deletar();
+                    automovel1.Deletar(automovel);
                     MenuPrincipal();
                     break;
             }

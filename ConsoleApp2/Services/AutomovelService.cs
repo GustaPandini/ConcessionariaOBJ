@@ -16,7 +16,7 @@ namespace ConsoleApp2.Services
         {
             _repository = new AutomovelRepository();
         }
-        public void Cadastrar(Automovel automovel)
+        public void Inserir(Automovel automovel)
         {
             _repository.Inserir(automovel);
         }

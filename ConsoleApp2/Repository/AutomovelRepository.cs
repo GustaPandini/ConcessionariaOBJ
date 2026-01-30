@@ -8,11 +8,17 @@ using ConsoleApp2.ConsoleHelper;
 using ConsoleApp2.Services;
 using MySql.Data.MySqlClient;
 using Dapper;
+using ConsoleApp2.Interfaces;
 
 namespace ConsoleApp2.Repository
 {
     internal class AutomovelRepository : Database
     {
+        private readonly Automovel _automovel;
+        public AutomovelRepository()
+        {
+            _automovel = new Automovel();
+        }
         public void Inserir(Automovel automovel)
         {
             string sql = "INSERT INTO automovel VALUEs (NULL, @Marca, @Modelo, @Powertrain, @Versao, @Cor, @Ano, " +
@@ -28,6 +34,29 @@ namespace ConsoleApp2.Repository
                 List<Automovel >automoveis = conexao.Query<Automovel>(sql).ToList();
                 return automoveis;
             }
+        }
+        public void Alterar(Automovel automovel)
+        {
+            string sql = "UPDATE automovel " +
+                         "SET MARCA = @marca, MODELO = @modelo, POWERTRAIN = @powertrain, VERSAO = @versao, COR = @cor, " +
+                         "ANO = @ano, ANOMODELO = @anoModelo, QUILOMETRAGEM = @quilometragem, PRECO = @preco, " +
+                         "BLINDADO = @blindado, QUANTIDADEDONOS = @quantidadeDonos WHERE Id = @id";
+
+            Execute(sql, automovel);
+        }
+        public Automovel MostarAutomovelPorId(int Id)
+        {
+            string sql = @"SELECT * FROM automovel WHERE Id = @id";
+            using (MySqlConnection conexao = GetConnection())
+            {
+                return conexao.QuerySingleOrDefault<Automovel>(sql, new { Id });
+            }
+        }
+        public void Deletar(Automovel automovel)
+        {
+            string sql = "DELETE FROM automovel WHERE ID = @Id";
+
+            Execute(sql, automovel);
         }
     }
 }
