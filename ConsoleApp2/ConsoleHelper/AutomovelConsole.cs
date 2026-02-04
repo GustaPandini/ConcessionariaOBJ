@@ -14,13 +14,11 @@ namespace ConsoleApp2.ConsoleHelper
     {
         private readonly AutomovelService _service;
         private readonly AutomovelRepository _repository;
-        private readonly Automovel _automovel;
 
         public AutomovelConsole()
         {
             _service = new AutomovelService();
             _repository = new AutomovelRepository();
-            _automovel = new Automovel();
         }
 
         public void Inserir(Automovel automovel)
@@ -36,37 +34,20 @@ namespace ConsoleApp2.ConsoleHelper
             Console.Write("Digite a Cor = ");
             automovel.Cor = Console.ReadLine();
             Console.Write("Digite o Ano = ");
-            automovel.Ano = Convert.ToInt32(Console.ReadLine());
+            automovel.Ano = _service.LerAno();
             Console.Write("Digite o Ano Modelo = ");
             automovel.AnoModelo = Convert.ToInt32(Console.ReadLine());
             Console.Write("Digite a quilometragem desse automóvel = ");
             automovel.Quilometragem = Convert.ToInt32(Console.ReadLine());
             Console.Write("Digite o preço desse automóvel = ");
             automovel.Preco = Convert.ToDecimal(Console.ReadLine());
-
-            while (true)
-            {
-                Console.Write("Digite se esse automóvel é blindado (Sim ou Não) = ");
-                string respBlindado = Console.ReadLine().ToLower();
-                if (respBlindado == "sim")
-                {
-                    automovel.Blindado = true;
-                    break;
-                }
-                else if (respBlindado == "não" || respBlindado == "nao")
-                {
-                    automovel.Blindado = false;
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Resposta inválida, digite sim ou não, tente novamente!");
-                }
-            }
-
+            Console.Write("Digite se esse automóvel é blindado (Sim ou Não) = ");
+            automovel.Blindado = _service.LerBlindagem();  
             Console.Write("Digite quantos donos esse automóvel já teve = ");
             automovel.QuantidadeDonos = Convert.ToInt32(Console.ReadLine());
-            _service.Inserir(automovel);
+
+            _repository.Inserir(automovel);
+
             Console.WriteLine("Veículo cadastrado com sucesso!, pressione Enter para voltar ao menu.");
             Console.ReadLine();
             Console.Clear();

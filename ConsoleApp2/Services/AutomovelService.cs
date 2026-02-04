@@ -16,9 +16,45 @@ namespace ConsoleApp2.Services
         {
             _repository = new AutomovelRepository();
         }
-        public void Inserir(Automovel automovel)
+        
+        public bool LerBlindagem()
         {
-            _repository.Inserir(automovel);
+            while (true)
+            {
+                string resp = Console.ReadLine().ToLower();
+                if (resp == "sim")
+                {
+                    return true;
+                }
+                else if (resp == "não" || resp == "nao")
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Resposta inválida, digite sim ou não, tente novamente!");
+                }
+            }
+        }
+        public int LerAno()
+        {
+            while(true)
+            {
+                int ano = Convert.ToInt32(Console.ReadLine());
+                DateTime agora = DateTime.Now;
+                if (ano < 1886)
+                {
+                    Console.WriteLine("O ano do automóvel não pode ser menor que 1886, pois não existiam automóveis antes dessa data, digite novamente o ano!");
+                }
+                else if (ano > agora.Year)
+                {
+                    Console.WriteLine("Não tem como um automóvel ter um ano maior que o ano presente, digite novamente o ano!");
+                }
+                else
+                {
+                    return ano;
+                }
+            }
         }
     }
 }
