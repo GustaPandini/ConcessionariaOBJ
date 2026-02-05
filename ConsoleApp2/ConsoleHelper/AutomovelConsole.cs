@@ -69,8 +69,7 @@ namespace ConsoleApp2.ConsoleHelper
                 Console.WriteLine($"Ano Modelo: {automovel.AnoModelo}");
                 Console.WriteLine($"Quilometragem: {automovel.Quilometragem}");
                 Console.WriteLine($"Preço: {automovel.Preco}");
-                if (automovel.Blindado == true) { Console.WriteLine("Blindado: Sim"); }
-                else { Console.WriteLine("Blindado: Não"); }
+                Console.WriteLine($"Blindado: " + _service.MostrarBlindagem(automovel));
                 Console.WriteLine($"Quantidade de donos: {automovel.QuantidadeDonos}");
                 Console.WriteLine("---------------------------");
             }
@@ -81,145 +80,64 @@ namespace ConsoleApp2.ConsoleHelper
             int Id = Convert.ToInt32(Console.ReadLine());
             automovel.Id = Id;
             Automovel automovelId = _repository.MostarAutomovelPorId(Id);
+
             Console.Write("Digite o novo valor para a Marca do automovel (se não quiser alterar pressione Enter) = ");
             string uptadeMarca = Console.ReadLine();
-            if (uptadeMarca == "")
-            {
-                automovel.Marca = automovelId.Marca;
-            }
-            else
-            {
-                automovel.Marca = uptadeMarca;
-            }
+            string valorAntigoMarca = automovelId.Marca;
+            automovel.Marca = _service.VerificarAlteracaoString(uptadeMarca, valorAntigoMarca);
 
             Console.Write("Digite o novo valor para o Modelo do automovel (se não quiser alterar pressione Enter) = ");
             string uptadeModelo = Console.ReadLine();
-            if (uptadeModelo == "")
-            {
-                automovel.Modelo = automovelId.Modelo;
-            }
-            else
-            {
-                automovel.Modelo = uptadeModelo;
-            }
+            string valorAntigoModelo = automovelId.Modelo;
+            automovel.Modelo = _service.VerificarAlteracaoString(uptadeModelo, valorAntigoModelo);
 
             Console.Write("Digite o novo valor para o Powertrain do automovel (se não quiser alterar pressione Enter) = ");
             string uptadePowertrain = Console.ReadLine();
-            if (uptadePowertrain == "")
-            {
-                automovel.Powertrain = automovelId.Powertrain;
-            }
-            else
-            {
-                automovel.Powertrain = uptadePowertrain;
-            }
+            string valorAntigoPowertrain = automovelId.Powertrain;
+            automovel.Powertrain = _service.VerificarAlteracaoString(uptadePowertrain, valorAntigoPowertrain);
 
             Console.Write("Digite o novo valor para a Versão do automovel (se não quiser alterar pressione Enter) = ");
             string uptadeVersao = Console.ReadLine();
-            if (uptadeVersao == "")
-            {
-                automovel.Versao = automovelId.Versao;
-            }
-            else
-            {
-                automovel.Versao = uptadeVersao;
-            }
+            string valorAntigoVersao = automovel.Versao;
+            automovel.Versao = _service.VerificarAlteracaoString(uptadeVersao, valorAntigoVersao);
 
             Console.Write("Digite o novo valor para a Cor do automovel (se não quiser alterar pressione Enter) = ");
             string uptadeCor = Console.ReadLine();
-            if (uptadeCor == "")
-            {
-                automovel.Cor = automovelId.Cor;
-            }
-            else
-            {
-                automovel.Cor = uptadeCor;
-            }
+            string valorAntigoCor = automovelId.Cor;
+            automovel.Cor = _service.VerificarAlteracaoString(uptadeCor, valorAntigoCor);
 
             Console.Write("Digite o novo valor para o Ano do automovel (se não quiser alterar pressione Enter) = ");
             string uptadeAnoString = Console.ReadLine();
-            if (uptadeAnoString == "")
-            {
-                automovel.Ano = automovelId.Ano;
-            }
-            else
-            {
-                int uptadeAno = Convert.ToInt32(uptadeAnoString);
-                automovel.Ano = uptadeAno;
-            }
+            int valorAntigoAno = automovelId.Ano;
+            automovel.Ano = _service.VerificarAlteracaoInt(uptadeAnoString, valorAntigoAno);
 
             Console.Write("Digite o novo valor para o Ano/Modelo do automovel (se não quiser alterar pressione Enter) = ");
             string uptadeAnoModeloString = Console.ReadLine();
-            if (uptadeAnoModeloString == "")
-            {
-                automovel.AnoModelo = automovelId.AnoModelo;
-            }
-            else
-            {
-                int uptadeAnoModelo = Convert.ToInt32(uptadeAnoModeloString);
-                automovel.AnoModelo = uptadeAnoModelo;
-            }
+            int valorAntigoAnoModelo = automovelId.AnoModelo;
+            automovel.AnoModelo = _service.VerificarAlteracaoInt(uptadeAnoModeloString, valorAntigoAnoModelo);
 
             Console.Write("Digite o novo valor para a Quilometragem do automovel (se não quiser alterar pressione Enter) = ");
             string uptadeQuilometragemString = Console.ReadLine();
-            if (uptadeQuilometragemString == "")
-            {
-                automovel.Quilometragem = automovelId.Quilometragem;
-            }
-            else
-            {
-                int uptadeQuilometragem = Convert.ToInt32(uptadeQuilometragemString);
-                automovel.Quilometragem = uptadeQuilometragem;
-            }
+            int valorAntigoQuilometragem = automovelId.Quilometragem;
+            automovel.Quilometragem = _service.VerificarAlteracaoInt(uptadeQuilometragemString, valorAntigoQuilometragem);
 
             Console.Write("Digite o novo valor para o Preço do automovel (se não quiser alterar pressione Enter) = ");
             string uptadePrecoString = Console.ReadLine();
-            if (uptadePrecoString == "")
-            {
-                automovel.Preco = automovelId.Preco;
-            }
-            else
-            {
-                decimal uptadePreco = Convert.ToDecimal(uptadePrecoString);
-                automovel.Preco = uptadePreco;
-            }
+            decimal valorAntigoPreco = automovelId.Preco;
+            automovel.Preco = _service.VerificarAlteracaoDecimal(uptadePrecoString, valorAntigoPreco);
 
-            while (true)
-            {
-                Console.Write("Digite se esse automóvel é blindado (Sim ou Não), se não quiser alterar pressione Enter = ");
-                string respBlindado = Console.ReadLine().ToLower();
-                if (respBlindado == "sim")
-                {
-                    automovel.Blindado = true;
-                    break;
-                }
-                else if (respBlindado == "não" || respBlindado == "nao")
-                {
-                    automovel.Blindado = false;
-                    break;
-                }
-                else if (respBlindado == "")
-                {
-                    automovel.Blindado = automovelId.Blindado;
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Resposta inválida, digite sim ou não, tente novamente!");
-                }
-            }
+            
+            Console.Write("Digite se esse automóvel é blindado (Sim ou Não), se não quiser alterar pressione Enter = ");
+            bool respBlindado = _service.LerBlindagem();
+            bool valorAntigoBlindado = automovelId.Blindado;
+            automovel.Blindado = _service.VerificarAlteracaoBool(respBlindado, valorAntigoBlindado);
+            
 
             Console.Write("Digite o novo valor para a quantidade de donos do automovel (se não quiser alterar pressione Enter) = ");
             string uptadeQuantidadeDonosString = Console.ReadLine();
-            if (uptadeQuantidadeDonosString == "")
-            {
-                automovel.QuantidadeDonos = automovelId.QuantidadeDonos;
-            }
-            else
-            {
-                int uptadeQuantidadeDonos = Convert.ToInt32(uptadeQuantidadeDonosString);
-                automovel.QuantidadeDonos = uptadeQuantidadeDonos;
-            }
+            int valorAntigoQuantidadeDonos = automovelId.QuantidadeDonos;
+            automovel.QuantidadeDonos = _service.VerificarAlteracaoInt(uptadeQuantidadeDonosString, valorAntigoQuantidadeDonos);
+
             _repository.Alterar(automovel);
             Console.WriteLine("Veículo alterado com sucesso, pressione Enter para voltar ao menu.");
             Console.ReadLine();

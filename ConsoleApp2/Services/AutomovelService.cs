@@ -1,5 +1,7 @@
 ﻿using ConsoleApp2.Entity;
 using ConsoleApp2.Repository;
+using Google.Protobuf.WellKnownTypes;
+using Mysqlx.Crud;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +56,66 @@ namespace ConsoleApp2.Services
                 {
                     return ano;
                 }
+            }
+        }
+        public string MostrarBlindagem(Automovel automovel)
+        {
+            string blindado;
+            if (automovel.Blindado == true) 
+            {
+                blindado = "Sim";
+                return blindado;
+            }
+            else 
+            {
+                blindado = "Não";
+                return blindado;
+            }
+        }
+        public string VerificarAlteracaoString(string uptade, string valorAntigo)
+        {
+            if (uptade == "")
+            {
+                return valorAntigo;
+            }
+            else
+            {
+                return uptade;
+            }
+        }
+        public int VerificarAlteracaoInt(string uptade, int valorAntigo)
+        {
+            if (uptade == "")
+            {
+                return valorAntigo;
+            }
+            else
+            {
+                int valorAtualizadoInt = Convert.ToInt32(uptade);
+                return valorAtualizadoInt;
+            }
+        }
+        public decimal VerificarAlteracaoDecimal(string uptade, decimal valorAntigo)
+        {
+            if (uptade == "")
+            {
+                return valorAntigo;
+            }
+            else
+            {
+                decimal valorAtualizadoDecimal = Convert.ToDecimal(uptade);
+                return valorAtualizadoDecimal;
+            }
+        }
+        public bool VerificarAlteracaoBool(bool uptade, bool valorAntigo)
+        {
+            if (uptade == null)
+            {
+                return valorAntigo;
+            }
+            else
+            {
+                return uptade;
             }
         }
     }
