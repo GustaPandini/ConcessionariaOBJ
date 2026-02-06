@@ -128,9 +128,8 @@ namespace ConsoleApp2.ConsoleHelper
 
             
             Console.Write("Digite se esse automóvel é blindado (Sim ou Não), se não quiser alterar pressione Enter = ");
-            bool respBlindado = _service.LerBlindagem();
             bool valorAntigoBlindado = automovelId.Blindado;
-            automovel.Blindado = _service.VerificarAlteracaoBool(respBlindado, valorAntigoBlindado);
+            automovel.Blindado = _service.VerificarAlteracaoBool(valorAntigoBlindado);
             
 
             Console.Write("Digite o novo valor para a quantidade de donos do automovel (se não quiser alterar pressione Enter) = ");
@@ -139,6 +138,7 @@ namespace ConsoleApp2.ConsoleHelper
             automovel.QuantidadeDonos = _service.VerificarAlteracaoInt(uptadeQuantidadeDonosString, valorAntigoQuantidadeDonos);
 
             _repository.Alterar(automovel);
+
             Console.WriteLine("Veículo alterado com sucesso, pressione Enter para voltar ao menu.");
             Console.ReadLine();
             Console.Clear();

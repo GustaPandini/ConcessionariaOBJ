@@ -107,15 +107,31 @@ namespace ConsoleApp2.Services
                 return valorAtualizadoDecimal;
             }
         }
-        public bool VerificarAlteracaoBool(bool uptade, bool valorAntigo)
+        public bool VerificarAlteracaoBool(bool valorAntigo)
         {
-            if (uptade == null)
+            while (true)
             {
-                return valorAntigo;
-            }
-            else
-            {
-                return uptade;
+                string uptade = Console.ReadLine();
+                if (uptade == "")
+                {
+                    return valorAntigo;
+                }
+                else
+                {
+                    uptade.ToLower();
+                    if (uptade == "sim")
+                    {
+                        return true;
+                    }
+                    else if (uptade == "nao" || uptade == "não")
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Resposta inválida, digite sim, não ou apenas pressione Enter, tente novamente!");
+                    }
+                }
             }
         }
     }
