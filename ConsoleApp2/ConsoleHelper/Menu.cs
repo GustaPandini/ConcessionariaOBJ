@@ -13,7 +13,7 @@ namespace ConsoleApp2.ConsoleHelper
     public class Menu
     {
         
-        private static Icrud<Automovel> automovel1 = new AutomovelConsole();
+        private static Icrud<Automovel> automovelConsole = new AutomovelConsole();
         public static void MenuPrincipal()
         {
             Console.WriteLine("Bem vindo ao sistema de controle da concessionária Tainy");
@@ -32,26 +32,25 @@ namespace ConsoleApp2.ConsoleHelper
         public static void AcesosMenuPrincipal()
         {
             
-            Automovel automovel = new Automovel();
             Console.Write("Digite o numero da ação que deseja realizar = ");
             int respostaMenu = Convert.ToInt32(Console.ReadLine());
 
             switch (respostaMenu)
             {
                 case 1:
-                    automovel1.Inserir(automovel);
+                    automovelConsole.Inserir();
                     MenuPrincipal();
                     break;
                 case 2:
-                    automovel1.Listar();
+                    automovelConsole.Listar();
                     MenuPrincipal();
                     break;
                 case 3:
-                    automovel1.Alterar(automovel);
+                    automovelConsole.Alterar();
                     MenuPrincipal();
                     break;
                 case 4:
-                    automovel1.Deletar(automovel);
+                    automovelConsole.Deletar();
                     MenuPrincipal();
                     break;
             }

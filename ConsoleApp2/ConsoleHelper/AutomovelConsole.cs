@@ -2,6 +2,7 @@
 using ConsoleApp2.Interfaces;
 using ConsoleApp2.Repository;
 using ConsoleApp2.Services;
+using Org.BouncyCastle.Asn1.IsisMtt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,9 @@ namespace ConsoleApp2.ConsoleHelper
             _repository = new AutomovelRepository();
         }
 
-        public void Inserir(Automovel automovel)
+        public void Inserir()
         {
+            Automovel automovel = new Automovel();
             Console.Write("Digite a Marca = ");
             automovel.Marca = Console.ReadLine();
             Console.Write("Digite o Modelo = ");
@@ -74,68 +76,68 @@ namespace ConsoleApp2.ConsoleHelper
                 Console.WriteLine("---------------------------");
             }
         }
-        public void Alterar(Automovel automovel)
+        public void Alterar()
         {
+            Automovel automovel = new Automovel();
             Console.Write("Digite o Id do automóvel que você deseja alterar no banco = ");
             int Id = Convert.ToInt32(Console.ReadLine());
             automovel.Id = Id;
             Automovel automovelId = _repository.MostarAutomovelPorId(Id);
 
             Console.Write("Digite o novo valor para a Marca do automovel (se não quiser alterar pressione Enter) = ");
-            string uptadeMarca = Console.ReadLine();
+            string updateMarca = Console.ReadLine();
             string valorAntigoMarca = automovelId.Marca;
-            automovel.Marca = _service.VerificarAlteracaoString(uptadeMarca, valorAntigoMarca);
+            automovel.Marca = _service.VerificarAlteracaoString(updateMarca, valorAntigoMarca);
 
             Console.Write("Digite o novo valor para o Modelo do automovel (se não quiser alterar pressione Enter) = ");
-            string uptadeModelo = Console.ReadLine();
+            string updateModelo = Console.ReadLine();
             string valorAntigoModelo = automovelId.Modelo;
-            automovel.Modelo = _service.VerificarAlteracaoString(uptadeModelo, valorAntigoModelo);
+            automovel.Modelo = _service.VerificarAlteracaoString(updateModelo, valorAntigoModelo);
 
             Console.Write("Digite o novo valor para o Powertrain do automovel (se não quiser alterar pressione Enter) = ");
-            string uptadePowertrain = Console.ReadLine();
+            string updatePowertrain = Console.ReadLine();
             string valorAntigoPowertrain = automovelId.Powertrain;
-            automovel.Powertrain = _service.VerificarAlteracaoString(uptadePowertrain, valorAntigoPowertrain);
+            automovel.Powertrain = _service.VerificarAlteracaoString(updatePowertrain, valorAntigoPowertrain);
 
             Console.Write("Digite o novo valor para a Versão do automovel (se não quiser alterar pressione Enter) = ");
-            string uptadeVersao = Console.ReadLine();
-            string valorAntigoVersao = automovel.Versao;
-            automovel.Versao = _service.VerificarAlteracaoString(uptadeVersao, valorAntigoVersao);
+            string updateVersao = Console.ReadLine();
+            string valorAntigoVersao = automovelId.Versao;
+            automovel.Versao = _service.VerificarAlteracaoString(updateVersao, valorAntigoVersao);
 
             Console.Write("Digite o novo valor para a Cor do automovel (se não quiser alterar pressione Enter) = ");
-            string uptadeCor = Console.ReadLine();
+            string updateCor = Console.ReadLine();
             string valorAntigoCor = automovelId.Cor;
-            automovel.Cor = _service.VerificarAlteracaoString(uptadeCor, valorAntigoCor);
+            automovel.Cor = _service.VerificarAlteracaoString(updateCor, valorAntigoCor);
 
             Console.Write("Digite o novo valor para o Ano do automovel (se não quiser alterar pressione Enter) = ");
-            string uptadeAnoString = Console.ReadLine();
             int valorAntigoAno = automovelId.Ano;
-            automovel.Ano = _service.VerificarAlteracaoInt(uptadeAnoString, valorAntigoAno);
+            automovel.Ano = LerAnoAlteracao(valorAntigoAno);
 
             Console.Write("Digite o novo valor para o Ano/Modelo do automovel (se não quiser alterar pressione Enter) = ");
-            string uptadeAnoModeloString = Console.ReadLine();
             int valorAntigoAnoModelo = automovelId.AnoModelo;
-            automovel.AnoModelo = _service.VerificarAlteracaoInt(uptadeAnoModeloString, valorAntigoAnoModelo);
+            int ano = automovel.Ano;
+            automovel.AnoModelo = LerAnoModeloAlteracao(valorAntigoAnoModelo, ano);
 
             Console.Write("Digite o novo valor para a Quilometragem do automovel (se não quiser alterar pressione Enter) = ");
-            string uptadeQuilometragemString = Console.ReadLine();
+            string updateQuilometragem = Console.ReadLine();
             int valorAntigoQuilometragem = automovelId.Quilometragem;
-            automovel.Quilometragem = _service.VerificarAlteracaoInt(uptadeQuilometragemString, valorAntigoQuilometragem);
+            automovel.Quilometragem = _service.VerificarAlteracaoInt(updateQuilometragem, valorAntigoQuilometragem);
 
             Console.Write("Digite o novo valor para o Preço do automovel (se não quiser alterar pressione Enter) = ");
-            string uptadePrecoString = Console.ReadLine();
+            string updatePreco = Console.ReadLine();
             decimal valorAntigoPreco = automovelId.Preco;
-            automovel.Preco = _service.VerificarAlteracaoDecimal(uptadePrecoString, valorAntigoPreco);
+            automovel.Preco = _service.VerificarAlteracaoDecimal(updatePreco, valorAntigoPreco);
 
             
             Console.Write("Digite se esse automóvel é blindado (Sim ou Não), se não quiser alterar pressione Enter = ");
             bool valorAntigoBlindado = automovelId.Blindado;
-            automovel.Blindado = _service.VerificarAlteracaoBool(valorAntigoBlindado);
+            automovel.Blindado = _service.VerificarAlteracaoBlindado(valorAntigoBlindado);
             
 
             Console.Write("Digite o novo valor para a quantidade de donos do automovel (se não quiser alterar pressione Enter) = ");
-            string uptadeQuantidadeDonosString = Console.ReadLine();
+            string updateQuantidadeDonos = Console.ReadLine();
             int valorAntigoQuantidadeDonos = automovelId.QuantidadeDonos;
-            automovel.QuantidadeDonos = _service.VerificarAlteracaoInt(uptadeQuantidadeDonosString, valorAntigoQuantidadeDonos);
+            automovel.QuantidadeDonos = _service.VerificarAlteracaoInt(updateQuantidadeDonos, valorAntigoQuantidadeDonos);
 
             _repository.Alterar(automovel);
 
@@ -143,8 +145,9 @@ namespace ConsoleApp2.ConsoleHelper
             Console.ReadLine();
             Console.Clear();
         }
-        public void Deletar(Automovel automovel)
+        public void Deletar()
         {
+            Automovel automovel = new Automovel();
             Console.Write("Digite o Id do automóvel que você deseja deletar no banco = ");
             automovel.Id = Convert.ToInt32(Console.ReadLine());
 
@@ -153,6 +156,44 @@ namespace ConsoleApp2.ConsoleHelper
             Console.WriteLine("Veículo excluido com sucesso, pressione Enter para voltar ao menu.");
             Console.ReadLine();
             Console.Clear();
+        }
+        public int LerAnoAlteracao(int valorAntigo)
+        {
+            while (true)
+            {
+                string updateAno = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(updateAno))
+                {
+                    return valorAntigo;
+                }
+
+                if (_service.VerificarAnoValido(updateAno, out int ano))
+                {
+                    return ano;
+                }
+
+                Console.Write("Ano inválido. Digite novamente: ");
+            }
+        }
+        public int LerAnoModeloAlteracao(int valorAntigo, int ano)
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    return valorAntigo;
+                }
+
+                if (_service.VerificarAnoModeloValido(input, out int anoModelo, ano))
+                {
+                    return anoModelo;
+                }
+
+                Console.Write("Ano-Modelo inválido. Digite novamente: ");
+            }
         }
     }
 }

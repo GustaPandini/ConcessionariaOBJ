@@ -1,6 +1,8 @@
-﻿using ConsoleApp2.Entity;
+﻿using ConsoleApp2.ConsoleHelper;
+using ConsoleApp2.Entity;
 using ConsoleApp2.Repository;
 using Google.Protobuf.WellKnownTypes;
+using Microsoft.VisualBasic;
 using Mysqlx.Crud;
 using System;
 using System.Collections.Generic;
@@ -72,58 +74,58 @@ namespace ConsoleApp2.Services
                 return blindado;
             }
         }
-        public string VerificarAlteracaoString(string uptade, string valorAntigo)
+        public string VerificarAlteracaoString(string update, string valorAntigo)
         {
-            if (uptade == "")
+            if (update == "")
             {
                 return valorAntigo;
             }
             else
             {
-                return uptade;
+                return update;
             }
         }
-        public int VerificarAlteracaoInt(string uptade, int valorAntigo)
+        public int VerificarAlteracaoInt(string update, int valorAntigo)
         {
-            if (uptade == "")
+            if (update == "")
             {
                 return valorAntigo;
             }
             else
             {
-                int valorAtualizadoInt = Convert.ToInt32(uptade);
+                int valorAtualizadoInt = Convert.ToInt32(update);
                 return valorAtualizadoInt;
             }
         }
-        public decimal VerificarAlteracaoDecimal(string uptade, decimal valorAntigo)
+        public decimal VerificarAlteracaoDecimal(string update, decimal valorAntigo)
         {
-            if (uptade == "")
+            if (update == "")
             {
                 return valorAntigo;
             }
             else
             {
-                decimal valorAtualizadoDecimal = Convert.ToDecimal(uptade);
+                decimal valorAtualizadoDecimal = Convert.ToDecimal(update);
                 return valorAtualizadoDecimal;
             }
         }
-        public bool VerificarAlteracaoBool(bool valorAntigo)
+        public bool VerificarAlteracaoBlindado(bool valorAntigo)
         {
             while (true)
             {
-                string uptade = Console.ReadLine();
-                if (uptade == "")
+                string update = Console.ReadLine();
+                if (update == "")
                 {
                     return valorAntigo;
                 }
                 else
                 {
-                    uptade.ToLower();
-                    if (uptade == "sim")
+                    update.ToLower();
+                    if (update == "sim")
                     {
                         return true;
                     }
-                    else if (uptade == "nao" || uptade == "não")
+                    else if (update == "nao" || update == "não")
                     {
                         return false;
                     }
@@ -134,5 +136,39 @@ namespace ConsoleApp2.Services
                 }
             }
         }
+        public bool VerificarAnoValido(string updateAno, out int ano)
+        {
+            ano = 0;
+            DateTime agora = DateTime.Now;
+
+            if (!int.TryParse(updateAno, out ano))
+            {
+                return false;
+            }
+
+            if (ano < 1886 || ano > agora.Year)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public bool VerificarAnoModeloValido(string input, out int anoModelo, int ano)
+        {
+            anoModelo = 0;
+
+            if (!int.TryParse(input, out anoModelo))
+            {
+                return false;
+            }
+
+            if (anoModelo < ano || anoModelo > ano+1)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }

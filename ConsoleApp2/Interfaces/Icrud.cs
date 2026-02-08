@@ -9,9 +9,9 @@ namespace ConsoleApp2.Interfaces
 {
     internal interface Icrud<T>
     {
-        void Inserir(Automovel automovel);
+        void Inserir();
         void Listar();
-        void Alterar(Automovel automovel);
-        void Deletar(Automovel automovel);
+        void Alterar();
+        void Deletar();
     }
 }
