@@ -44,7 +44,7 @@ namespace ConsoleApp2.ConsoleHelper
             Console.Write("Digite o preço desse automóvel = ");
             automovel.Preco = Convert.ToDecimal(Console.ReadLine());
             Console.Write("Digite se esse automóvel é blindado (Sim ou Não) = ");
-            automovel.Blindado = _service.LerBlindagem();  
+            automovel.Blindado = LerBlindado();  
             Console.Write("Digite quantos donos esse automóvel já teve = ");
             automovel.QuantidadeDonos = Convert.ToInt32(Console.ReadLine());
 
@@ -131,7 +131,7 @@ namespace ConsoleApp2.ConsoleHelper
             
             Console.Write("Digite se esse automóvel é blindado (Sim ou Não), se não quiser alterar pressione Enter = ");
             bool valorAntigoBlindado = automovelId.Blindado;
-            automovel.Blindado = _service.VerificarAlteracaoBlindado(valorAntigoBlindado);
+            automovel.Blindado = LerBlindadoAlteracao(valorAntigoBlindado);
             
 
             Console.Write("Digite o novo valor para a quantidade de donos do automovel (se não quiser alterar pressione Enter) = ");
@@ -157,6 +157,23 @@ namespace ConsoleApp2.ConsoleHelper
             Console.ReadLine();
             Console.Clear();
         }
+        public bool LerBlindado()
+        {
+            while (true)
+            {
+                string input = Console.ReadLine().ToLower();
+                if(_service.LerValidacaoBlindado(input, out bool blindado))
+                {
+                    return blindado;
+                }
+
+                Console.Write("Valor Blindado inválido, digite novamente: ");
+            }
+        }
+        public int LerAno()
+        {
+            return 1;
+        }
         public int LerAnoAlteracao(int valorAntigo)
         {
             while (true)
@@ -173,7 +190,7 @@ namespace ConsoleApp2.ConsoleHelper
                     return ano;
                 }
 
-                Console.Write("Ano inválido. Digite novamente: ");
+                Console.Write("Ano inválido. Digite novamente (ou pressione Enter para manter o valor antigo): ");
             }
         }
         public int LerAnoModeloAlteracao(int valorAntigo, int ano)
@@ -192,7 +209,24 @@ namespace ConsoleApp2.ConsoleHelper
                     return anoModelo;
                 }
 
-                Console.Write("Ano-Modelo inválido. Digite novamente: ");
+                Console.Write("Ano-Modelo inválido. Digite novamente(ou pressione Enter para manter o valor antigo): ");
+            }
+        }
+        public bool LerBlindadoAlteracao(bool valorAntigo)
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    return valorAntigo;
+                }
+                if(_service.VerificarBlindadoValido(input, out bool blindado))
+                {
+                    return blindado;
+                }
+
+                Console.Write("Valor Blindado inválido, digite novamente (ou pressione Enter para manter o valor antigo): ");
             }
         }
     }

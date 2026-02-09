@@ -21,24 +21,20 @@ namespace ConsoleApp2.Services
             _repository = new AutomovelRepository();
         }
         
-        public bool LerBlindagem()
+        public bool LerValidacaoBlindado(string input, out bool blindado)
         {
-            while (true)
+            blindado = false;
+            if (input == "sim")
             {
-                string resp = Console.ReadLine().ToLower();
-                if (resp == "sim")
-                {
-                    return true;
-                }
-                else if (resp == "não" || resp == "nao")
-                {
-                    return false;
-                }
-                else
-                {
-                    Console.WriteLine("Resposta inválida, digite sim ou não, tente novamente!");
-                }
+                blindado = true;
+                return true;
             }
+            else if (input == "não" || input == "nao")
+            {
+                blindado = false;
+                return true;
+            }
+            return blindado;
         }
         public int LerAno()
         {
@@ -74,38 +70,38 @@ namespace ConsoleApp2.Services
                 return blindado;
             }
         }
-        public string VerificarAlteracaoString(string update, string valorAntigo)
+        public string VerificarAlteracaoString(string input, string valorAntigo)
         {
-            if (update == "")
+            if (string.IsNullOrWhiteSpace(input))
             {
                 return valorAntigo;
             }
             else
             {
-                return update;
+                return input;
             }
         }
-        public int VerificarAlteracaoInt(string update, int valorAntigo)
+        public int VerificarAlteracaoInt(string input, int valorAntigo)
         {
-            if (update == "")
+            if (string.IsNullOrWhiteSpace(input))
             {
                 return valorAntigo;
             }
             else
             {
-                int valorAtualizadoInt = Convert.ToInt32(update);
+                int valorAtualizadoInt = Convert.ToInt32(input);
                 return valorAtualizadoInt;
             }
         }
-        public decimal VerificarAlteracaoDecimal(string update, decimal valorAntigo)
+        public decimal VerificarAlteracaoDecimal(string input, decimal valorAntigo)
         {
-            if (update == "")
+            if (string.IsNullOrWhiteSpace(input))
             {
                 return valorAntigo;
             }
             else
             {
-                decimal valorAtualizadoDecimal = Convert.ToDecimal(update);
+                decimal valorAtualizadoDecimal = Convert.ToDecimal(input);
                 return valorAtualizadoDecimal;
             }
         }
@@ -113,19 +109,19 @@ namespace ConsoleApp2.Services
         {
             while (true)
             {
-                string update = Console.ReadLine();
-                if (update == "")
+                string input = Console.ReadLine();
+                if (input == "")
                 {
                     return valorAntigo;
                 }
                 else
                 {
-                    update.ToLower();
-                    if (update == "sim")
+                    input.ToLower();
+                    if (input == "sim")
                     {
                         return true;
                     }
-                    else if (update == "nao" || update == "não")
+                    else if (input == "nao" || input == "não")
                     {
                         return false;
                     }
@@ -136,12 +132,12 @@ namespace ConsoleApp2.Services
                 }
             }
         }
-        public bool VerificarAnoValido(string updateAno, out int ano)
+        public bool VerificarAnoValido(string input, out int ano)
         {
             ano = 0;
             DateTime agora = DateTime.Now;
 
-            if (!int.TryParse(updateAno, out ano))
+            if (!int.TryParse(input, out ano))
             {
                 return false;
             }
@@ -168,6 +164,23 @@ namespace ConsoleApp2.Services
             }
 
             return true;
+        }
+        public bool VerificarBlindadoValido(string input, out bool blindado)
+        {
+            input.ToLower();
+            blindado = false;
+            if (input == "sim")
+            {
+                blindado = true;
+                return true;
+            }
+            else if (input == "nao" || input == "não")
+            {
+                blindado = false;
+                return true;
+            }
+            
+            return false;
         }
 
     }
