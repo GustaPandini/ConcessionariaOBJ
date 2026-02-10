@@ -26,27 +26,28 @@ namespace ConsoleApp2.ConsoleHelper
         {
             Automovel automovel = new Automovel();
             Console.Write("Digite a Marca = ");
-            automovel.Marca = Console.ReadLine();
+            automovel.Marca = LerValorString();
             Console.Write("Digite o Modelo = ");
-            automovel.Modelo = Console.ReadLine();
+            automovel.Modelo = LerValorString();
             Console.Write("Digite o PowerTrain = ");
-            automovel.Powertrain = Console.ReadLine();
+            automovel.Powertrain = LerValorString();
             Console.Write("Digite a Versão = ");
-            automovel.Versao = Console.ReadLine();
+            automovel.Versao = LerValorString();
             Console.Write("Digite a Cor = ");
-            automovel.Cor = Console.ReadLine();
+            automovel.Cor = LerValorString();
             Console.Write("Digite o Ano = ");
-            automovel.Ano = _service.LerAno();
+            automovel.Ano = LerAno();
+            int ano = automovel.Ano;
             Console.Write("Digite o Ano Modelo = ");
-            automovel.AnoModelo = Convert.ToInt32(Console.ReadLine());
+            automovel.AnoModelo = LerAnoModelo(ano);
             Console.Write("Digite a quilometragem desse automóvel = ");
-            automovel.Quilometragem = Convert.ToInt32(Console.ReadLine());
+            automovel.Quilometragem = LerValorInt();
             Console.Write("Digite o preço desse automóvel = ");
-            automovel.Preco = Convert.ToDecimal(Console.ReadLine());
+            automovel.Preco = LerPreco();
             Console.Write("Digite se esse automóvel é blindado (Sim ou Não) = ");
             automovel.Blindado = LerBlindado();  
             Console.Write("Digite quantos donos esse automóvel já teve = ");
-            automovel.QuantidadeDonos = Convert.ToInt32(Console.ReadLine());
+            automovel.QuantidadeDonos = LerValorInt();
 
             _repository.Inserir(automovel);
 
@@ -157,6 +158,35 @@ namespace ConsoleApp2.ConsoleHelper
             Console.ReadLine();
             Console.Clear();
         }
+        public string LerValorString()
+        {
+            while(true)
+            {
+                string input = Console.ReadLine();
+
+                if (_service.ValidacaoValorString(input))
+                {
+                    return input;
+                }
+
+                Console.Write("Valor nulo ou vazio, digite novamente: ");
+            }
+        }
+        public int LerValorInt()
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                if (_service.VerificarValorInt(input, out int valor))
+                {
+                    return valor;
+                }
+
+                Console.WriteLine("O valor deve ser um número inteiro.");
+                Console.Write("Digite novamente o valor: ");
+            }
+        }
         public bool LerBlindado()
         {
             while (true)
@@ -172,25 +202,67 @@ namespace ConsoleApp2.ConsoleHelper
         }
         public int LerAno()
         {
-            return 1;
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                if (_service.VerificarAnoValido(input, out int ano))
+                {
+                    return ano;
+                }
+
+                Console.WriteLine("Ano inválido (o ano deve ser um número inteiro, maior que 1885 e não maior que o ano atual!).");
+                Console.Write("Digite novamente o ano: ");
+            }
+        }
+        public decimal LerPreco()
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                if(_service.VerificarPreco(input, out decimal valor))
+                {
+                    return valor;
+                }
+
+                Console.WriteLine("Preço inválido (o preço deve ser um número maior que 0!).");
+                Console.Write("Digite novamente o preço: ");
+            }
+        }
+        public int LerAnoModelo(int ano)
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                if (_service.VerificarAnoModeloValido(input, out int anoModelo, ano))
+                {
+                    return anoModelo;
+                }
+
+                Console.WriteLine("Ano-Modelo inválido (o Ano-Modelo deve ser um número inteiro, não menor que o ano do automovel e nem 2 anos maior!).");
+                Console.Write("Digite novamente o Ano-Modelo: ");
+            }
         }
         public int LerAnoAlteracao(int valorAntigo)
         {
             while (true)
             {
-                string updateAno = Console.ReadLine();
+                string input = Console.ReadLine();
 
-                if (string.IsNullOrWhiteSpace(updateAno))
+                if (string.IsNullOrWhiteSpace(input))
                 {
                     return valorAntigo;
                 }
 
-                if (_service.VerificarAnoValido(updateAno, out int ano))
+                if (_service.VerificarAnoValido(input, out int ano))
                 {
                     return ano;
                 }
 
-                Console.Write("Ano inválido. Digite novamente (ou pressione Enter para manter o valor antigo): ");
+                Console.WriteLine("Ano inválido (o ano deve ser um número inteiro, maior que 1885 e não maior que o ano atual!).");
+                Console.Write("Digite novamente (ou pressione Enter para manter o valor antigo): ");
             }
         }
         public int LerAnoModeloAlteracao(int valorAntigo, int ano)

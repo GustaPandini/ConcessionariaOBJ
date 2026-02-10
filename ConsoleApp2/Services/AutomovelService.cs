@@ -4,6 +4,7 @@ using ConsoleApp2.Repository;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.VisualBasic;
 using Mysqlx.Crud;
+using Mysqlx.Datatypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,14 @@ namespace ConsoleApp2.Services
         public AutomovelService()
         {
             _repository = new AutomovelRepository();
+        }
+        public bool ValidacaoValorString(string input)
+        {
+            if(string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+            return true;
         }
         
         public bool LerValidacaoBlindado(string input, out bool blindado)
@@ -36,26 +45,7 @@ namespace ConsoleApp2.Services
             }
             return blindado;
         }
-        public int LerAno()
-        {
-            while(true)
-            {
-                int ano = Convert.ToInt32(Console.ReadLine());
-                DateTime agora = DateTime.Now;
-                if (ano < 1886)
-                {
-                    Console.WriteLine("O ano do automóvel não pode ser menor que 1886, pois não existiam automóveis antes dessa data, digite novamente o ano!");
-                }
-                else if (ano > agora.Year)
-                {
-                    Console.WriteLine("Não tem como um automóvel ter um ano maior que o ano presente, digite novamente o ano!");
-                }
-                else
-                {
-                    return ano;
-                }
-            }
-        }
+        
         public string MostrarBlindagem(Automovel automovel)
         {
             string blindado;
@@ -104,6 +94,23 @@ namespace ConsoleApp2.Services
                 decimal valorAtualizadoDecimal = Convert.ToDecimal(input);
                 return valorAtualizadoDecimal;
             }
+        }
+        public bool VerificarPreco(string input, out decimal valor)
+        {
+            valor = 0;
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+            if(!decimal.TryParse(input, out valor))
+            {
+                return false;
+            }
+            if(valor < 0)
+            {
+                return false;
+            }
+            return true;
         }
         public bool VerificarAlteracaoBlindado(bool valorAntigo)
         {
@@ -163,6 +170,19 @@ namespace ConsoleApp2.Services
                 return false;
             }
 
+            return true;
+        }
+        public bool VerificarValorInt(string input, out int valor)
+        {
+            valor = 0;
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+            if (!int.TryParse(input, out valor))
+            {
+                return false;
+            }
             return true;
         }
         public bool VerificarBlindadoValido(string input, out bool blindado)
