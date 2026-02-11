@@ -2,12 +2,6 @@
 using ConsoleApp2.Interfaces;
 using ConsoleApp2.Repository;
 using ConsoleApp2.Services;
-using Org.BouncyCastle.Asn1.IsisMtt;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp2.ConsoleHelper
 {
@@ -49,7 +43,7 @@ namespace ConsoleApp2.ConsoleHelper
             Console.Write("Digite quantos donos esse automóvel já teve = ");
             automovel.QuantidadeDonos = LerValorInt();
 
-            _repository.Inserir(automovel);
+            _service.Inserir(automovel);
 
             Console.WriteLine("Veículo cadastrado com sucesso!, pressione Enter para voltar ao menu.");
             Console.ReadLine();
@@ -120,9 +114,8 @@ namespace ConsoleApp2.ConsoleHelper
             automovel.AnoModelo = LerAnoModeloAlteracao(valorAntigoAnoModelo, ano);
 
             Console.Write("Digite o novo valor para a Quilometragem do automovel (se não quiser alterar pressione Enter) = ");
-            string updateQuilometragem = Console.ReadLine();
             int valorAntigoQuilometragem = automovelId.Quilometragem;
-            automovel.Quilometragem = _service.VerificarAlteracaoInt(updateQuilometragem, valorAntigoQuilometragem);
+            automovel.Quilometragem = LerValorIntAlteracao(valorAntigoQuilometragem);
 
             Console.Write("Digite o novo valor para o Preço do automovel (se não quiser alterar pressione Enter) = ");
             string updatePreco = Console.ReadLine();
@@ -136,11 +129,10 @@ namespace ConsoleApp2.ConsoleHelper
             
 
             Console.Write("Digite o novo valor para a quantidade de donos do automovel (se não quiser alterar pressione Enter) = ");
-            string updateQuantidadeDonos = Console.ReadLine();
             int valorAntigoQuantidadeDonos = automovelId.QuantidadeDonos;
-            automovel.QuantidadeDonos = _service.VerificarAlteracaoInt(updateQuantidadeDonos, valorAntigoQuantidadeDonos);
+            automovel.QuantidadeDonos = LerValorIntAlteracao(valorAntigoQuantidadeDonos);
 
-            _repository.Alterar(automovel);
+            _service.Alterar(automovel);
 
             Console.WriteLine("Veículo alterado com sucesso, pressione Enter para voltar ao menu.");
             Console.ReadLine();
@@ -152,11 +144,30 @@ namespace ConsoleApp2.ConsoleHelper
             Console.Write("Digite o Id do automóvel que você deseja deletar no banco = ");
             automovel.Id = Convert.ToInt32(Console.ReadLine());
 
-            _repository.Deletar(automovel);
+            _service.Deletar(automovel);
 
             Console.WriteLine("Veículo excluido com sucesso, pressione Enter para voltar ao menu.");
             Console.ReadLine();
             Console.Clear();
+        }
+        public int LerValorIntAlteracao(int valorAntigo)
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                if (_service.VerificarAlteracaoInt(input))
+                {
+                    return valorAntigo;
+                }
+                if (_service.VerificarAlteracaoValidaInt(input, out int valor))
+                {
+                    return valor;
+                }
+
+                Console.WriteLine("Valor digitado inválido (o valor deve ser um número inteiro, ou apenas pressione Enter para manter o valor antigo).");
+                Console.Write("Digite novamente o valor: ");
+            }
         }
         public string LerValorString()
         {

@@ -1,15 +1,5 @@
-﻿using ConsoleApp2.ConsoleHelper;
-using ConsoleApp2.Entity;
+﻿using ConsoleApp2.Entity;
 using ConsoleApp2.Repository;
-using Google.Protobuf.WellKnownTypes;
-using Microsoft.VisualBasic;
-using Mysqlx.Crud;
-using Mysqlx.Datatypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp2.Services
 {
@@ -71,17 +61,21 @@ namespace ConsoleApp2.Services
                 return input;
             }
         }
-        public int VerificarAlteracaoInt(string input, int valorAntigo)
+        public bool VerificarAlteracaoInt(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
-                return valorAntigo;
+                return true;
             }
-            else
+            return false;
+        }
+        public bool VerificarAlteracaoValidaInt(string input, out int valor)
+        {
+            if (int.TryParse(input, out valor))
             {
-                int valorAtualizadoInt = Convert.ToInt32(input);
-                return valorAtualizadoInt;
+                return true;
             }
+            return false;
         }
         public decimal VerificarAlteracaoDecimal(string input, decimal valorAntigo)
         {
@@ -112,33 +106,7 @@ namespace ConsoleApp2.Services
             }
             return true;
         }
-        public bool VerificarAlteracaoBlindado(bool valorAntigo)
-        {
-            while (true)
-            {
-                string input = Console.ReadLine();
-                if (input == "")
-                {
-                    return valorAntigo;
-                }
-                else
-                {
-                    input.ToLower();
-                    if (input == "sim")
-                    {
-                        return true;
-                    }
-                    else if (input == "nao" || input == "não")
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Resposta inválida, digite sim, não ou apenas pressione Enter, tente novamente!");
-                    }
-                }
-            }
-        }
+        
         public bool VerificarAnoValido(string input, out int ano)
         {
             ano = 0;
@@ -202,6 +170,17 @@ namespace ConsoleApp2.Services
             
             return false;
         }
-
+        public void Inserir(Automovel automovel)
+        {
+            _repository.Inserir(automovel);
+        }
+        public void Alterar(Automovel automovel)
+        {
+            _repository.Alterar(automovel);
+        }
+        public void Deletar(Automovel automovel)
+        {
+            _repository.Deletar(automovel);
+        }
     }
 }

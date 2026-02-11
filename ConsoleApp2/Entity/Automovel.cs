@@ -1,17 +1,4 @@
-﻿using ConsoleApp2.ConsoleHelper;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Dapper;
-using Mysqlx.Prepare;
-using System.Runtime.CompilerServices;
-
-namespace ConsoleApp2.Entity
+﻿namespace ConsoleApp2.Entity
 {
     internal class Automovel
     {
