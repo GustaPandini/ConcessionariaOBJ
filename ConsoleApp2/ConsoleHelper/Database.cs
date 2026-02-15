@@ -1,16 +1,13 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Configuration;
 using Dapper;
+
 
 namespace ConsoleApp2.ConsoleHelper
 {
     internal class Database
     {
-        protected string conectionString = "Server=localhost;Database=concesionaria;Uid=root;Pwd=2017;";
+        protected string conectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         protected MySqlConnection GetConnection()
         {

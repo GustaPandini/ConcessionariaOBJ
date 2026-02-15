@@ -49,3 +49,4 @@ C:\Users\gugui\Desktop\Portifólio\ConcessionariaOBJ\ConsoleApp2\bin\Debug\net6.
 C:\Users\gugui\Desktop\Portifólio\ConcessionariaOBJ\ConsoleApp2\bin\Debug\net6.0\runtimes\win-x64\native\krbcc64.dll
 C:\Users\gugui\Desktop\Portifólio\ConcessionariaOBJ\ConsoleApp2\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\gugui\Desktop\Portifólio\ConcessionariaOBJ\ConsoleApp2\obj\Debug\net6.0\ConsoleApp2.csproj.CopyComplete
+C:\Users\gugui\Desktop\Portifólio\ConcessionariaOBJ\ConsoleApp2\bin\Debug\net6.0\ConsoleApp2.dll.config
