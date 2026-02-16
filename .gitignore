@@ -1,6 +1,7 @@
 .vs
 .obj
 .bin
+.App.config
 *.suo
 *.user
 *.sln.docstates
