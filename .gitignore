@@ -1,9 +1,6 @@
 .vs
 .obj
 .bin
-App.config
-App1.config.Teste
-
 *.suo
 *.user
 *.sln.docstates
