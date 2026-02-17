@@ -1,14 +1,7 @@
 ﻿using ConsoleApp2.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ConsoleApp2.ConsoleHelper;
-using ConsoleApp2.Services;
 using MySql.Data.MySqlClient;
 using Dapper;
-using ConsoleApp2.Interfaces;
 
 namespace ConsoleApp2.Repository
 {

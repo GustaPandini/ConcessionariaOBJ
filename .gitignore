@@ -1,10 +1,11 @@
 .vs
 .obj
 .bin
-App.config
 *.suo
 *.user
 *.sln.docstates
+
+ConsoleApp2/App.config
 
 # Build results
 [Dd]ebug/
