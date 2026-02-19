@@ -4,7 +4,16 @@
 <configuration>
 	<connectionStrings>
 		<add name="DefaultConnection"
-			 connectionString="Server=localhost;Database=concesionaria;Uid=root;Pwd=;"
+			 connectionString="Server=localhost;Database=concessionaria;Uid=appuser;Pwd=;"
 			 providerName="MySql.Data.MySqlClient"/>
 	</connectionStrings>
 </configuration>
+
+
+<!--
+Digite a sua senha novamente nesse SQL abaixo e rode ele no MySql Workbench antes de iniciar o sistema! 
+
+CREATE USER 'appuser'@'localhost' IDENTIFIED BY 'SUA_SENHA';
+GRANT ALL PRIVILEGES ON concesionaria.* TO 'appuser'@'localhost';
+FLUSH PRIVILEGES;
+-->
