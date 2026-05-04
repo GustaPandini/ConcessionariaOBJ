@@ -1,4 +1,6 @@
 ﻿using ConsoleApp2.ConsoleHelper;
+using ConsoleApp2.Repository;
+using ConsoleApp2.Services;
 using MySql.Data.MySqlClient;
 
 namespace ConsoleApp2
@@ -11,8 +13,12 @@ namespace ConsoleApp2
         }
         private static void IniciarAplicacao()
         {
+            var repository = new AutomovelRepository();
+            var service = new AutomovelService(repository);
+            var console = new AutomovelConsole(service);
             try
             {
+                Menu.Inicializar(console);
                 Menu.MenuPrincipal();
             }
             catch (MySqlException ex)

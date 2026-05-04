@@ -3,13 +3,13 @@ using ConsoleApp2.Repository;
 
 namespace ConsoleApp2.Services
 {
-    internal class AutomovelService
+    public class AutomovelService
     {
-        private readonly AutomovelRepository _repository;
+        public readonly AutomovelRepository _repository;
 
-        public AutomovelService()
+        public AutomovelService(AutomovelRepository repository)
         {
-            _repository = new AutomovelRepository();
+            _repository = repository;
         }
         public bool ValidacaoValorString(string input)
         {

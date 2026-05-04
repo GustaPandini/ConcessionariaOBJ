@@ -5,7 +5,7 @@ using Dapper;
 
 namespace ConsoleApp2.Repository
 {
-    internal class AutomovelRepository : Database
+    public class AutomovelRepository : Database
     {
         private readonly Automovel _automovel;
         public AutomovelRepository()

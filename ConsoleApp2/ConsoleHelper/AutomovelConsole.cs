@@ -5,14 +5,14 @@ using ConsoleApp2.Services;
 
 namespace ConsoleApp2.ConsoleHelper
 {
-    internal class AutomovelConsole : Icrud<Automovel>
+    public class AutomovelConsole : Icrud<Automovel>
     {
         private readonly AutomovelService _service;
         private readonly AutomovelRepository _repository;
 
-        public AutomovelConsole()
+        public AutomovelConsole(AutomovelService service)
         {
-            _service = new AutomovelService();
+            _service = service;
             _repository = new AutomovelRepository();
         }
 

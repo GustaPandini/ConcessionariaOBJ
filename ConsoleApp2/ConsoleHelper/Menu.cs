@@ -5,8 +5,13 @@ namespace ConsoleApp2.ConsoleHelper
 {
     public static class Menu
     {
-        
-        private static Icrud<Automovel> automovelConsole = new AutomovelConsole();
+
+        public static Icrud<Automovel> automovelConsole;
+
+        public static void Inicializar(Icrud<Automovel> console)
+        {
+            automovelConsole = console;
+        }
         public static void MenuPrincipal()
         {
             while(true)

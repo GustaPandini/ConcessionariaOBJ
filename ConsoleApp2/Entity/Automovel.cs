@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp2.Entity
 {
-    internal class Automovel
+    public class Automovel
     {
         public int Id { get; set; }
         public string Marca { get; set; }

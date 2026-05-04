@@ -5,7 +5,7 @@ using Dapper;
 
 namespace ConsoleApp2.ConsoleHelper
 {
-    internal class Database
+    public class Database
     {
         protected string conectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
