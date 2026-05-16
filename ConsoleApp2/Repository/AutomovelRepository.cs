@@ -8,14 +8,14 @@ namespace ConsoleApp2.Repository
     public class AutomovelRepository : Database
     {
         private readonly Automovel _automovel;
-        public AutomovelRepository()
-        {
-            _automovel = new Automovel();
-        }
+        public AutomovelRepository() { }
+
         public void Inserir(Automovel automovel)
         {
-            string sql = "INSERT INTO automovel VALUEs (NULL, @Marca, @Modelo, @Powertrain, @Versao, @Cor, @Ano, " +
-                         "@AnoModelo, @Quilometragem, @Preco, @Blindado, @QuantidadeDonos)";
+            string sql = "INSERT INTO automovel " +
+                         "(Marca, Modelo, Powertrain, Versao, Cor, Ano, AnoModelo, Quilometragem, Preco, Blindado, QuantidadeDonos) " +
+                         "VALUEs " +
+                         "(@Marca, @Modelo, @Powertrain, @Versao, @Cor, @Ano, @AnoModelo, @Quilometragem, @Preco, @Blindado, @QuantidadeDonos)";
             Execute(sql, automovel);
         }
         public List<Automovel> Listar()

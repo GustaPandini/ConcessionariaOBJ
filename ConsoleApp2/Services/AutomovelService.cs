@@ -5,12 +5,19 @@ namespace ConsoleApp2.Services
 {
     public class AutomovelService
     {
-        public readonly AutomovelRepository _repository;
+        private readonly AutomovelRepository _repository;
 
         public AutomovelService(AutomovelRepository repository)
         {
             _repository = repository;
         }
+
+        public void Inserir(Automovel automovel) => _repository.Inserir(automovel);
+        public void Alterar(Automovel automovel) => _repository.Alterar(automovel);
+        public void Deletar(Automovel automovel) => _repository.Deletar(automovel);
+        public List<Automovel> Listar() => _repository.Listar();
+        public Automovel ObterPorId(int id) => _repository.MostarAutomovelPorId(id);
+
         public bool ValidacaoValorString(string input)
         {
             if(string.IsNullOrWhiteSpace(input))
@@ -169,18 +176,6 @@ namespace ConsoleApp2.Services
             }
             
             return false;
-        }
-        public void Inserir(Automovel automovel)
-        {
-            _repository.Inserir(automovel);
-        }
-        public void Alterar(Automovel automovel)
-        {
-            _repository.Alterar(automovel);
-        }
-        public void Deletar(Automovel automovel)
-        {
-            _repository.Deletar(automovel);
         }
     }
 }

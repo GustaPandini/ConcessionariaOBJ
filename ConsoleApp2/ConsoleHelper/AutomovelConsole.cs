@@ -8,12 +8,10 @@ namespace ConsoleApp2.ConsoleHelper
     public class AutomovelConsole : Icrud<Automovel>
     {
         private readonly AutomovelService _service;
-        private readonly AutomovelRepository _repository;
 
         public AutomovelConsole(AutomovelService service)
         {
             _service = service;
-            _repository = new AutomovelRepository();
         }
 
         public void Inserir()
