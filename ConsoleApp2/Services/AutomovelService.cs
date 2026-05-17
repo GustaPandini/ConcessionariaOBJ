@@ -84,17 +84,23 @@ namespace ConsoleApp2.Services
             }
             return false;
         }
-        public decimal VerificarAlteracaoDecimal(string input, decimal valorAntigo)
+
+        public bool VerificarAlteracaoDecimal(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
-                return valorAntigo;
+                return true;
             }
-            else
+            return false;
+        }
+
+        public bool VerificarAlteracaoValidaDecimal(string input, out decimal valorAtualizado)
+        {
+            if (decimal.TryParse(input, out valorAtualizado))
             {
-                decimal valorAtualizadoDecimal = Convert.ToDecimal(input);
-                return valorAtualizadoDecimal;
+                return true;
             }
+            return false;
         }
         public bool VerificarPreco(string input, out decimal valor)
         {

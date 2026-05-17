@@ -116,9 +116,8 @@ namespace ConsoleApp2.ConsoleHelper
             automovel.Quilometragem = LerValorIntAlteracao(valorAntigoQuilometragem);
 
             Console.Write("Digite o novo valor para o Preço do automovel (se não quiser alterar pressione Enter) = ");
-            string updatePreco = Console.ReadLine();
             decimal valorAntigoPreco = automovelId.Preco;
-            automovel.Preco = _service.VerificarAlteracaoDecimal(updatePreco, valorAntigoPreco);
+            automovel.Preco = LerValorDecimalAlteracao(valorAntigoPreco);
 
             
             Console.Write("Digite se esse automóvel é blindado (Sim ou Não), se não quiser alterar pressione Enter = ");
@@ -167,6 +166,27 @@ namespace ConsoleApp2.ConsoleHelper
                 Console.Write("Digite novamente o valor: ");
             }
         }
+
+        public decimal LerValorDecimalAlteracao(decimal valorAntigo)
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                if (_service.VerificarAlteracaoDecimal(input))
+                {
+                    return valorAntigo;
+                }
+                if (_service.VerificarAlteracaoValidaDecimal(input, out decimal valor))
+                {
+                    return valor;
+                }
+
+                Console.WriteLine("Valor digitado inválido (o valor deve ser um número inteiro, ou apenas pressione Enter para manter o valor antigo).");
+                Console.Write("Digite novamente o valor: ");
+            }
+        }
+
         public string LerValorString()
         {
             while(true)
