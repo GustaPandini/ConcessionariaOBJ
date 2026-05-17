@@ -49,7 +49,7 @@ namespace ConsoleApp2.ConsoleHelper
         }
         public void Listar()
         {
-            List<Automovel> automoveis = _repository.Listar();
+            List<Automovel> automoveis = _service.Listar();
             Console.WriteLine("=== LISTA DE AUTOMÓVEIS ===");
 
             foreach (var automovel in automoveis)
@@ -73,9 +73,9 @@ namespace ConsoleApp2.ConsoleHelper
         {
             Automovel automovel = new Automovel();
             Console.Write("Digite o Id do automóvel que você deseja alterar no banco = ");
-            int Id = Convert.ToInt32(Console.ReadLine());
+            int Id = LerValorInt();
             automovel.Id = Id;
-            Automovel automovelId = _repository.MostarAutomovelPorId(Id);
+            Automovel automovelId = _service.ObterPorId(Id);
 
             Console.Write("Digite o novo valor para a Marca do automovel (se não quiser alterar pressione Enter) = ");
             string updateMarca = Console.ReadLine();
@@ -140,7 +140,7 @@ namespace ConsoleApp2.ConsoleHelper
         {
             Automovel automovel = new Automovel();
             Console.Write("Digite o Id do automóvel que você deseja deletar no banco = ");
-            automovel.Id = Convert.ToInt32(Console.ReadLine());
+            automovel.Id = LerValorInt();
 
             _service.Deletar(automovel);
 
