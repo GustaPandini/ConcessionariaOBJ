@@ -5,7 +5,7 @@ using ConsoleApp2.Services;
 
 namespace ConsoleApp2.ConsoleHelper
 {
-    public class AutomovelConsole : Icrud<Automovel>
+    public class AutomovelConsole : ICrud<Automovel>
     {
         private readonly AutomovelService _service;
 

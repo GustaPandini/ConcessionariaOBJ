@@ -37,7 +37,7 @@ namespace ConsoleApp2.Repository
 
             Execute(sql, automovel);
         }
-        public Automovel MostarAutomovelPorId(int Id)
+        public Automovel MostrarAutomovelPorId(int Id)
         {
             string sql = @"SELECT * FROM automovel WHERE Id = @id";
             using (MySqlConnection conexao = GetConnection())

@@ -1,7 +1,7 @@
 ﻿
 namespace ConsoleApp2.Interfaces
 {
-    public interface Icrud<T>
+    public interface ICrud<T>
     {
         void Inserir();
         void Listar();

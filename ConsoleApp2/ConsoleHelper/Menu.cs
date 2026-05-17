@@ -6,9 +6,9 @@ namespace ConsoleApp2.ConsoleHelper
     public static class Menu
     {
 
-        public static Icrud<Automovel> automovelConsole;
+        public static ICrud<Automovel> automovelConsole;
 
-        public static void Inicializar(Icrud<Automovel> console)
+        public static void Inicializar(ICrud<Automovel> console)
         {
             automovelConsole = console;
         }

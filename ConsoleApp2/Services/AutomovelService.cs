@@ -16,7 +16,7 @@ namespace ConsoleApp2.Services
         public void Alterar(Automovel automovel) => _repository.Alterar(automovel);
         public void Deletar(Automovel automovel) => _repository.Deletar(automovel);
         public List<Automovel> Listar() => _repository.Listar();
-        public Automovel ObterPorId(int id) => _repository.MostarAutomovelPorId(id);
+        public Automovel ObterPorId(int id) => _repository.MostrarAutomovelPorId(id);
 
         public bool ValidacaoValorString(string input)
         {
