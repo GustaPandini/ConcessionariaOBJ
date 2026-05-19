@@ -6,15 +6,9 @@ namespace ConsoleApp2.ConsoleHelper
     public static class Menu
     {
 
-        public static ICrud<Automovel> automovelConsole;
-
-        public static void Inicializar(ICrud<Automovel> console)
+        public static void MenuPrincipal(ICrud<Automovel> console)
         {
-            automovelConsole = console;
-        }
-        public static void MenuPrincipal()
-        {
-            while(true)
+            while (true)
             {
                 Console.WriteLine("Bem vindo ao sistema de controle da concessionária Tainy");
                 Console.WriteLine("");
@@ -27,13 +21,13 @@ namespace ConsoleApp2.ConsoleHelper
                 Console.WriteLine("-----------------------------------");
                 Console.WriteLine();
 
-                AcessosMenuPrincipal();
+                AcessosMenuPrincipal(console);
             }
         }
 
-        public static void AcessosMenuPrincipal()
+        public static void AcessosMenuPrincipal(ICrud<Automovel> console)
         {
-            
+
             Console.Write("Digite o numero da ação que deseja realizar = ");
             if (!int.TryParse(Console.ReadLine(), out int respostaMenu))
             {
@@ -41,19 +35,19 @@ namespace ConsoleApp2.ConsoleHelper
                 return;
             }
 
-                switch (respostaMenu)
+            switch (respostaMenu)
             {
                 case 1:
-                    automovelConsole.Inserir();
+                    console.Inserir();
                     break;
                 case 2:
-                    automovelConsole.Listar();
+                    console.Listar();
                     break;
                 case 3:
-                    automovelConsole.Alterar();
+                    console.Alterar();
                     break;
                 case 4:
-                    automovelConsole.Deletar();
+                    console.Deletar();
                     break;
                 case 0:
                     Environment.Exit(0);

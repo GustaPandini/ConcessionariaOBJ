@@ -37,7 +37,7 @@ namespace ConsoleApp2.ConsoleHelper
             Console.Write("Digite o preço desse automóvel = ");
             automovel.Preco = LerPreco();
             Console.Write("Digite se esse automóvel é blindado (Sim ou Não) = ");
-            automovel.Blindado = LerBlindado();  
+            automovel.Blindado = LerBlindado();
             Console.Write("Digite quantos donos esse automóvel já teve = ");
             automovel.QuantidadeDonos = LerValorInt();
 
@@ -119,11 +119,11 @@ namespace ConsoleApp2.ConsoleHelper
             decimal valorAntigoPreco = automovelId.Preco;
             automovel.Preco = LerValorDecimalAlteracao(valorAntigoPreco);
 
-            
+
             Console.Write("Digite se esse automóvel é blindado (Sim ou Não), se não quiser alterar pressione Enter = ");
             bool valorAntigoBlindado = automovelId.Blindado;
             automovel.Blindado = LerBlindadoAlteracao(valorAntigoBlindado);
-            
+
 
             Console.Write("Digite o novo valor para a quantidade de donos do automovel (se não quiser alterar pressione Enter) = ");
             int valorAntigoQuantidadeDonos = automovelId.QuantidadeDonos;
@@ -189,7 +189,7 @@ namespace ConsoleApp2.ConsoleHelper
 
         public string LerValorString()
         {
-            while(true)
+            while (true)
             {
                 string input = Console.ReadLine();
 
@@ -221,7 +221,7 @@ namespace ConsoleApp2.ConsoleHelper
             while (true)
             {
                 string input = Console.ReadLine().ToLower();
-                if(_service.LerValidacaoBlindado(input, out bool blindado))
+                if (_service.LerValidacaoBlindado(input, out bool blindado))
                 {
                     return blindado;
                 }
@@ -250,7 +250,7 @@ namespace ConsoleApp2.ConsoleHelper
             {
                 string input = Console.ReadLine();
 
-                if(_service.VerificarPreco(input, out decimal valor))
+                if (_service.VerificarPreco(input, out decimal valor))
                 {
                     return valor;
                 }
@@ -322,7 +322,7 @@ namespace ConsoleApp2.ConsoleHelper
                 {
                     return valorAntigo;
                 }
-                if(_service.VerificarBlindadoValido(input, out bool blindado))
+                if (_service.VerificarBlindadoValido(input, out bool blindado))
                 {
                     return blindado;
                 }

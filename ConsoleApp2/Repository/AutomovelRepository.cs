@@ -12,10 +12,10 @@ namespace ConsoleApp2.Repository
 
         public void Inserir(Automovel automovel)
         {
-            string sql = "INSERT INTO automovel " +
-                         "(Marca, Modelo, Powertrain, Versao, Cor, Ano, AnoModelo, Quilometragem, Preco, Blindado, QuantidadeDonos) " +
-                         "VALUEs " +
-                         "(@Marca, @Modelo, @Powertrain, @Versao, @Cor, @Ano, @AnoModelo, @Quilometragem, @Preco, @Blindado, @QuantidadeDonos)";
+            string sql = @"INSERT INTO automovel 
+                         (Marca, Modelo, Powertrain, Versao, Cor, Ano, AnoModelo, Quilometragem, Preco, Blindado, QuantidadeDonos) 
+                         VALUEs 
+                         (@Marca, @Modelo, @Powertrain, @Versao, @Cor, @Ano, @AnoModelo, @Quilometragem, @Preco, @Blindado, @QuantidadeDonos)";
             Execute(sql, automovel);
         }
         public List<Automovel> Listar()
@@ -24,16 +24,16 @@ namespace ConsoleApp2.Repository
 
             using (MySqlConnection conexao = GetConnection())
             {
-                List<Automovel >automoveis = conexao.Query<Automovel>(sql).ToList();
+                List<Automovel> automoveis = conexao.Query<Automovel>(sql).ToList();
                 return automoveis;
             }
         }
         public void Alterar(Automovel automovel)
         {
-            string sql = "UPDATE automovel " +
-                         "SET MARCA = @marca, MODELO = @modelo, POWERTRAIN = @powertrain, VERSAO = @versao, COR = @cor, " +
-                         "ANO = @ano, ANOMODELO = @anoModelo, QUILOMETRAGEM = @quilometragem, PRECO = @preco, " +
-                         "BLINDADO = @blindado, QUANTIDADEDONOS = @quantidadeDonos WHERE Id = @id";
+            string sql = @"UPDATE automovel 
+                         SET MARCA = @marca, MODELO = @modelo, POWERTRAIN = @powertrain, VERSAO = @versao, COR = @cor, 
+                         ANO = @ano, ANOMODELO = @anoModelo, QUILOMETRAGEM = @quilometragem, PRECO = @preco, 
+                         BLINDADO = @blindado, QUANTIDADEDONOS = @quantidadeDonos WHERE Id = @id";
 
             Execute(sql, automovel);
         }

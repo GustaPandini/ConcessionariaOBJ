@@ -18,8 +18,7 @@ namespace ConsoleApp2
             var console = new AutomovelConsole(service);
             try
             {
-                Menu.Inicializar(console);
-                Menu.MenuPrincipal();
+                Menu.MenuPrincipal(console);
             }
             catch (MySqlException ex)
             {
